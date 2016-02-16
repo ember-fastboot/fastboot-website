@@ -11,7 +11,7 @@ Router.map(function() {
   this.route('cli-reference');
   this.route('architecture');
   this.route('philosophy');
-  this.route('deployment');
+  this.route('deploying');
 });
 
 export default Router;

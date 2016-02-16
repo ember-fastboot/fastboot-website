@@ -1,0 +1,155 @@
+<section>
+  <h1>FastBoot Architecture</h1>
+</section>
+
+<section>
+  <h3>Introduction to Server-Side Rendering</h3>
+  <p>
+    FastBoot implements server-side rendering, which means it runs your
+    JavaScript Ember app on the server so it can send HTML to the user, not an
+    empty white screen while the JavaScript loads.
+  </p>
+  <p>
+    Server-side rendering, or SSR, is a relatively new idea. Because it's so
+    new, there are often misconceptions about how it works. Let's start by
+    defining what SSR is not.
+  </p>
+  <p>
+    <strong>FastBoot does not replace your existing server.</strong>
+    Instead, FastBoot drops in on top of your existing API server to
+    improve startup performance and make your Ember app more accessible
+    to user agents without JavaScript.
+  </p>
+  <p>
+    Perhaps the best way to think about FastBoot is that it is like a browser
+    running in your datacenter. This browser already has your Ember application
+    loaded and running.
+  </p>
+  <p>
+    When a request comes in from an end user, the browser in the datacenter is
+    told to visit the same URL. Because it is already running, there is little
+    startup time. And because it's in the same datacenter as your API server,
+    network requests are very low latency. It's like a turbocharged version of the
+    app running in the user's browser.
+  </p>
+  <p>
+    Once the browser on the server finishes loading the requested URL, we take
+    its DOM, serialize it to HTML, and send it to the user's browser running on
+    their device. They don't need to download a bunch of JavaScript, wait for it
+    to start up, then wait some more while it makes API requests for the data
+    needed to render.
+  </p>
+  <p>
+    Instead, the very first thing the user's browser downloads is the rendered
+    HTML.  Only once the HTML and CSS have finished loading does the browser
+    start to download the Ember app's JavaScript.
+  </p>
+  <p>
+    For users with slow connections or slow devices, this means the very first
+    thing they see is the content they were after. No more waiting around for
+    multi-hundred-kilobyte payloads to download and parse just to read a blog
+    post.
+  </p>
+</section>
+
+<section>
+  <h3>Packaging Your App</h3>
+  <p>
+    When you run <code>ember build</code> at the command line, Ember compiles
+    your application into the <code>dist</code> directory. That directory
+    contains everything you need to make your application work in the browser.
+    You can upload it to a static hosting service like S3 or Firebase, where
+    browsers can download and run the JavaScript on the user's device.
+  </p>
+  <p>
+    FastBoot is a little different because, instead of being purely static, it
+    renders HTML on the server and therefore needs more than just static hosting.
+    We need to produce a build of the Ember app that's designed to work in
+    Node.js rather than the browser.
+  </p>
+  <p class="note">
+    One of our goals is to one day produce a "universal" build of an Ember app
+    that runs in both environments, to make release tracking easier. But for
+    right now, you will need to manage two builds.
+  </p>
+  <p>
+    That's just what the <code>ember fastboot:build</code> command does. It
+    creates a compiled version of your application with browser-specific code
+    stripped out (and sometimes Node-specific code added) and puts it in the
+    <code>fastboot-dist</code> directory.
+  </p>
+  <p>
+    You can test that the process is working (and that your app is
+    FastBoot-compatible) by running <code>ember fastboot</code>, which builds
+    your app then starts up a local server.
+  </p>
+  <p>
+    Once you've confirmed everything looks good, it's ready to hand off to the
+    FastBoot server running in the production environment. The good news is that
+    this process is usually handled for you by a deployment plugin for <code>ember-cli-deploy</code>;
+    see {{#link-to 'deploying'}}Deploying{{/link-to}} for more information about
+    different deployment strategies.
+  </p>
+</section>
+
+<section>
+  <h3>The FastBoot Server</h3>
+  <p>
+    The <a href="https://github.com/ember-fastboot/ember-fastboot-server">FastBoot
+    server</a> is the heart of the FastBoot architecture. The server is an
+    <a href="http://expressjs.com">Express middleware</a> that can be integrated
+    into an existing Node.js infrastructure, or run standalone.
+  </p>
+
+  <pre>
+var server = new FastBootServer({
+  appFile: appFile,
+  vendorFile: vendorFile,
+  htmlFile: htmlFile,
+  ui: ui
+});
+
+var app = express();
+
+app.get('/*', server.middleware());
+
+var listener = app.listen(options.port, function() {
+  var host = listener.address().address;
+  var port = listener.address().port;
+
+  console.log('FastBoot running at http://' + host + ":" + port);
+});
+  </pre>
+</section>
+
+<section>
+  <h3>Frequently Asked Questions</h3>
+  <p class="question">
+    Does this mean I need to rewrite my API server in Ember or JavaScript?
+  </p>
+  <p>
+    No. FastBoot works with your existing API rather than replacing it. That means
+    you can drop in FastBoot no matter what backend you use, whether it's Node.js,
+    Rails, PHP, .NET, Java, or any other stack.
+  </p>
+  <p>
+    That said, the FastBoot server <em>does</em> require Node.js. So even though
+    you don't need to replace your backend, you do need to have the ability to
+    deploy Node.js apps.
+  </p>
+  <p class="question">
+    If the app is running in FastBoot and not the user's browser, how do I access
+    things like <code>localStorage</code> where I keep authentication tokens?
+  </p>
+  <p>
+    The only information about the user requesting the page is any HTTP cookies you
+    have set. To work with FastBoot, you should store critical information in
+    cookies.
+  </p>
+  <p>
+    Alternatively, you can store session data for users in stateful persistence
+    on the server, such as a Redis instance. When the request comes in, you will
+    need to exchange a cookie for the full user session. We hope that the community
+    can work together to build a robust solution to this scenario.
+  </p>
+</section>

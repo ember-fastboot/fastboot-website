@@ -17,7 +17,7 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size: 60px;;
+  font-size: 40px;
   font-weight: 400;
 }
 
@@ -106,10 +106,11 @@ pre {
 
 section {
   width: 80%;
-  max-width: 1024px;
+  max-width: 700px;
   margin: 32px auto;
   font-size: 18px;
   line-height: 1.3;
+  position: relative;
 }
 
 .nav-bar + section {
@@ -118,7 +119,7 @@ section {
 
 h3 {
   margin: 16px 0;
-  font-size: 32px;
+  font-size: 28px;
   color: #8668bf;
 }
 
@@ -131,13 +132,37 @@ h3 {
   font-family: Monaco, fixed;
 }
 
-@media screen and (min-width: 768px) {
+p.question {
+  font-weight: bold;
+}
+
+p.note {
+  font-size: 70%;
+  background-color: #E4D6FF;
+  padding: 13px;
+}
+
+@media screen and (min-width: 1024px) {
+  h1 {
+    font-size: 60px;
+  }
+
   h3 {
     font-size: 40px;
+    line-height: 1;
   }
 
   section {
+    max-width: 650px;
     line-height: 1.6;
+  }
+
+  p.note {
+    margin-right: -200px;
+    position: absolute;
+    right: 0;
+    top: auto; /* default */
+    width: 180px;
   }
 
   .intro {
@@ -183,11 +208,21 @@ h3 {
 }
 
 @media screen and (min-width: 2000px) {
+  p.note {
+    font-size: 80%;
+    margin-right: -320px;
+    position: absolute;
+    right: 0;
+    top: auto; /* default */
+    width: 300px;
+  }
+
   h3 {
     font-size: 60px;
   }
 
   section {
+    max-width: 1024px;
     font-size: 24px;
     margin: 64px auto;
   }
