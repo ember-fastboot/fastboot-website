@@ -1,5 +1,86 @@
 <div class="intro">
   <div class="instructions">
+    <h1>
+      FastBoot is progressive enhancement
+      for JavaScript
+    </h1>
+    <h2>
+      Server-side rendering for your Ember app.
+      <br>
+      Installs in one command.
+    </h2>
+    <div class="buttons">
+      {{#link-to 'quickstart'}}Quickstart{{/link-to}}
+    </div>
   </div>
 </div>
 
+<section id="install">
+  <h3>Installation</h3>
+  <div class="command-prompt">
+    › ember install ember-cli-fastboot
+  </div>
+  <p>
+    FastBoot requires Ember.js 2.3 or later.
+    Ember.js 2.4 beta or later is recommended.
+  </p>
+  <p>The FastBoot server requires Node.js 0.10 or later.</p>
+</section>
+
+<section id="how-does-it-work">
+  <h3>How Does It Work?</h3>
+  <p>
+    FastBoot works by running your Ember application in Node.js. When a
+    user visits your site, the initial HTML is rendered and served to the user.
+    The very first thing they see is your content.
+  </p>
+  <p>Only after the content has loaded do they start downloading JavaScript.
+  Once finished, your app takes over. You get the same snappy performance
+  you're used to from Ember apps.</p>
+  <p>And yes, this means the content in your Ember application is accessible to
+  everyone, even if they have JavaScript turned off. It's even accessible to
+  cURL&mdash;try it yourself:</p>
+
+  <div class="command-prompt">
+    › curl http://www.ember-fastboot.com
+  </div>
+
+  <p>
+  For more information, see {{#link-to
+  'architecture'}}Architecture{{/link-to}} and {{#link-to 'philosophy'}}
+  Philosophy{{/link-to}}.
+  </p>
+</section>
+
+<section id="running-fastboot">
+  <h3>Running FastBoot</h3>
+  <p>To start the FastBoot server during development:</p>
+
+  <div class="command-prompt">
+    › ember fastboot
+  </div>
+
+  <p>
+    For more information, see the {{#link-to 'quickstart'}}Quickstart{{/link-to}}
+    or {{#link-to 'cli-reference'}}FastBoot CLI Reference{{/link-to}}.
+  </p>
+</section>
+
+<section id="get-help-and-contribute">
+  <h3>Get Help &amp; Contribute</h3>
+  <p>
+    The FastBoot source code is <a href="https://github.com/tildeio/ember-cli-fastboot">available on GitHub</a>.
+    If you run into an error, please <a href="https://github.com/emberjs/ember.js/issues">file an issue</a>
+  </p>
+  <p>
+    The best way to get help is via the <a href="https://ember-community-slackin.herokuapp.com/">Ember Community Slack</a>.
+    Once you've signed up, join the <code>#fastboot</code> channel.
+  </p>
+</section>
+
+Deployment
+npm dependencies
+Road to 1.0
+Compatible Addons
+Environment-Specific Code
+Troubleshooting

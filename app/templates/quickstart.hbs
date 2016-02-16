@@ -1,0 +1,172 @@
+<section>
+  <h1>FastBoot Quickstart</h1>
+</section>
+
+<section>
+  <h3>Creating a New Ember App</h3>
+  <p>
+    This quickstart guide will walk you through creating a simple Ember
+    app that fetches data from GitHub, then renders it using FastBoot.
+  </p>
+  <p>
+    To start, make sure you&apos;ve got Node.js and npm installed. If
+    you've never used Ember before, you may want to run through the <a
+    href="https://guides.emberjs.com/v2.3.0/getting-started/quick-start/">Ember
+    quickstart guide</a>.
+  </p>
+  <p>Install Ember by running:</p>
+  <div class="command-prompt">
+    npm install ember-cli -g
+  </div>
+  <p>
+    Create a new application by running:
+  </p>
+  <div class="command-prompt">
+    ember new github-fastboot-example
+  </div>
+  <p>
+    Once created, <code>cd</code> into the
+    <code>github-fastboot-example</code> directory.
+  </p>
+  <p>
+    We need to fetch data from the GitHub API, but there's a small
+    problem: the browser uses <code>XMLHttpRequest</code> to fetch JSON
+    data, while in Node.js you'd use the <code>http</code> library.
+    We'll be running the same Ember.js app in both environments, so we
+    need some way of making it work in both.
+  </p>
+  <p>
+    Let's install a tool that will let us write the same code whether our app
+    is running in the browser or on the server. Code that runs in both places
+    is sometimes called <em>universal</em> or <em>isomorphic</em>.
+  </p>
+
+  <p>
+    Run the following command to install <code>ember-network</code>:
+  </p>
+  <div class="command-prompt">
+    ember install ember-network
+  </div>
+  <p>
+    Under the hood, the <code>ember install</code> command is just like <code>npm install</code>, but automatically
+    saves the addon to your <code>package.json</code> file.
+  </p>
+</section>
+
+<section>
+  <h3>Rendering the Model</h3>
+  <p>
+   In Ember, routes are objects responsible for fetching model data.
+   Let's make a route that fetches information about you from GitHub.
+  </p>
+  <p>
+  Run the following command in your terminal:
+  </p>
+  <div class="command-prompt">
+    ember generate route index
+  </div>
+  <p>
+   This will generate a new route called <code>index</code>. By convention,
+   <code>index</code> is the name of the route for when the user visits the root
+   path, or <code>/</code>. Think of it like <code>index.html</code>.
+  </p>
+  <p>Open the newly-created <code>app/routes/index.js</code> file in your code editor.
+  Let's add a method called <code>model()</code> to the route that fetches information about your user
+    from GitHub.
+  </p>
+  <p>We'll use the <code>fetch</code> polyfill exposed by the <code>ember-network</code> addon
+  that lets us write universal fetching code for both the browser and Node.js. A <em>polyfill</em>
+  is a library that provides a standardized API that isn't available in all environments yet. In this
+  case, it's polyfilling the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>.
+  </p>
+  <p>
+    Implement the model hook like I did below. You might want to change the username in the URL from
+    mine to yours.
+  </p>
+  <pre>
+import Ember from 'ember';
+import fetch from 'ember-network/fetch';
+
+export default Ember.Route.extend({
+  model() {
+    return fetch('https://api.github.com/users/tomdale')
+      .then(function(response) {
+        return response.json();
+      });
+  }
+});
+  </pre>
+  <p>
+  Next, let's render that model in the <code>index</code> template. Open
+  <code>app/templates/index.hbs</code> and type the following Handlebars template:
+  </p>
+  <pre>
+&lt;p>
+  Username: \{{model.login}}
+&lt;/p>
+&lt;p>
+  Avatar: &lt;img src=\{{model.avatar_url}} width=32 height=32>
+&lt;/p>
+&lt;p>
+  # of Public Repos: \{{model.public_repos}}
+&lt;/p>
+  </pre>
+
+  <p>Once you've made those changes (don't forget to save!), switch back to the terminal
+  and run the development server:</p>
+  <div class="command-prompt">
+    ember server
+  </div>
+  <p>
+    This runs a local development server you can use to verify your program is
+    running correctly. Visit <a href="http://localhost:4200/">localhost:4200/</a>
+    in your browser. You should see your GitHub profile rendered below a title that says
+    "Welcome to Ember.js".
+  </p>
+  <img src="/images/quickstart/github-fastboot-example-screenshot.png" alt="Screenshot of completed app">
+  <p>We've verified we've got a working application, but there's one problem. If you use your browser's
+  View Source feature, you'll see that there's no HTML being rendered: just an empty body and some <code>&lt;script&gt;</code>
+  tags. Let's fix that.</p>
+  <img src="/images/quickstart/github-fastboot-example-empty-source.png" alt="Screenshot showing that the HTML does not contain the application contents">
+</section>
+
+<section>
+  <h3>Install FastBoot</h3>
+  <p>Back in the terminal, stop the development server by hitting <code>Ctrl-C</code> on your keyboard.</p>
+  <p>Next, install FastBoot:</p>
+  <div class="command-prompt">
+    ember install ember-cli-fastboot
+  </div>
+  <p>
+    Let's turn on server-side rendering and make sure it works. Start the FastBoot server like this:
+  </p>
+  <div class="command-prompt">
+    ember fastboot --serve-assets
+  </div>
+  <p>The <code>--serve-assets</code> option tells the FastBoot server to serve CSS, JavaScript and images in addition to
+  just rendering the HTML.</p>
+  <p>View the FastBoot-rendered content by visiting <a href="http://localhost:3000/">localhost:3000/</a>. Note the different port!
+  This is port 3000 instead of port 4200 like before.</p>
+  <p>
+    Everything should look just the same as before. The only difference is that, this time when you View Source, the <code>&lt;body&gt;</code>
+    tag is populated with the rendered HTML content.
+  </p>
+  <img src="/images/quickstart/github-fastboot-example-populated-source.png" alt="Screenshot showing that application content is now rendered as HTML">
+  <p>
+    Congraulations! You've just built your first FastBoot application.
+  </p>
+  <p>
+    Let's review what we've accomplished here:
+  </p>
+  <ol>
+    <li>We created a new app in one command with <code>ember new</code></li>
+      <li>We used the universal library <code>ember-network</code> to request AJAX data</li>
+      <li>When rendering in Node.js, the FastBoot server requested data from GitHub <em>on the user's behalf</em></li>
+    <li>We wrote an app that has the benefits of traditional server-side rendering <strong>and</strong>
+      the benefits of client-side JavaScript, in a single codebase. No hacks, just installing an addon.</li>
+  </ol>
+  <p>
+    Now that you've got your first FastBoot app, it's time to start adding FastBoot to your existing apps. Or, learn how to
+    deploy your new app by learning about {{#link-to 'deployment'}}Deployment{{/link-to}}.
+  </p>
+</section>

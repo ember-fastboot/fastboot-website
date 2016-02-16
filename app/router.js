@@ -6,6 +6,12 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('quickstart');
+  this.route('best-practices');
+  this.route('cli-reference');
+  this.route('architecture');
+  this.route('philosophy');
+  this.route('deployment');
 });
 
 export default Router;
