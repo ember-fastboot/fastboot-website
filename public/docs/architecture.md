@@ -102,11 +102,11 @@ To use `ember-network`, install it as you would any addon:
 ember install ember-network
 ```
 
-Once installed, you can import it using the JavaScript module syntax
-like this, wherever you need to make a network request:
+Once installed, you can import it using the JavaScript module syntax,
+wherever you need to make a network request:
 
 ```js
-import fetch from "ember-network/fetch";
+import fetch from 'ember-network/fetch';
 ```
 
 The `fetch()` method returns a promise and is very similar to jQuery's
@@ -115,8 +115,8 @@ here's an Ember route that uses `fetch()` to access the GitHub JSON API
 and use it as the route's model:
 
 ```js
-import Route from "ember-route";
-import fetch from "ember-network/fetch";
+import Route from 'ember-route';
+import fetch from 'ember-network/fetch';
 
 export default Route.extend({
   model() {
@@ -176,7 +176,7 @@ that is rendered into your application's `<head>` tag. To configure what
 gets rendered, edit the newly-created `app/templates/head.hbs` file.
 
 For example, to set the title used when embedding a route in Facebook
-(or any other Open Graph-comaptible app), add the appropriate `<meta>`
+(or any other Open Graph-compatible app), add the appropriate `<meta>`
 tag to `head.hbs`:
 
 ```handlebars
@@ -192,9 +192,9 @@ determined dynamically by the current route's model:
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  // The headData service is the model of the template,
+  // This service is the `model` in the head.hbs template,
   // so any properties you set on it are accessible via
-  // `model.whatever` in the head.hbs template.
+  // `model.whatever`.
   headData: Ember.inject.service(),
 
   afterModel(model) {
@@ -217,8 +217,8 @@ You can inject the FastBoot service by importing `ember-service/inject`,
 or use `Ember.inject.service` if you are using globals:
 
 ```js
-import Component from "ember-component";
-import injectService from "ember-service/inject";
+import Component from 'ember-component';
+import injectService from 'ember-service/inject';
 
 export default Component.extend({
   fastboot: injectService()
@@ -240,8 +240,8 @@ Here's an example of a route that logs the `X-Request-ID` header for the current
 request, if it exists:
 
 ```js
-import Route from "ember-route";
-import injectService from "ember-service/inject";
+import Route from 'ember-route';
+import injectService from 'ember-service/inject';
 
 export default Route.extend({
   fastboot: injectService(),
@@ -269,9 +269,9 @@ token when talking to an API server, allowing us to "impersonate" the
 user.
 
 ```js
-import Route from "ember-route";
-import fetch from "ember-network/fetch";
-import injectService from "ember-service/inject";
+import Route from 'ember-route';
+import fetch from 'ember-network/fetch';
+import injectService from 'ember-service/inject';
 
 export default Route.extend({
   fastboot: injectService(),
@@ -292,9 +292,9 @@ export default Route.extend({
 
 ### Check the Current Host
 
-You can access the hostname the current FastBoot server via the
-`fastboot` service. The `host` function will return the protocol and the
-host (`https://example.com`).
+You can access the hostname of the current FastBoot server via the
+`fastboot` service. The `host` property will include the protocol and
+the host (e.g. `https://example.com`).
 
 ```js
 export default Ember.Route.extend({
@@ -309,8 +309,8 @@ export default Ember.Route.extend({
 
 **Warning**: The host is supplied by the user, is easily spoofed, and
 should not be trusted. To retrieve the host of the current request, you
-must specify a list of hosts that you expect in your
-`config/environment.js`:
+must specify a list of hosts that you expect by adding a `hostWhitelist`
+configuration in your app's `config/environment.js` file:
 
 ```js
 module.exports = function(environment) {
@@ -353,7 +353,7 @@ develop your app, you may need to pull in additional dependencies
 to provide for functionality not available by default in Node.
 
 For example, `localStorage` is not available in Node.js and you may
-instead want to save values to a Redis server by using the `radredis`
+instead want to save information to a Redis server by using the `radredis`
 npm packge.
 
 For security reasons, your Ember app running in FastBoot can only access
@@ -384,7 +384,7 @@ The `fastbootDependencies` in the above example means the only modules
 your Ember app can use are `radredis` (provided from npm) and `path` (a
 built-in Node module).
 
-If the package you are using is not built-in to Node, **you must also
+If the package you are using is not built in to Node, **you must also
 specify the package and a version in the `package.json` `dependencies`
 hash.** Built-in modules (`path`, `fs`, etc.) only need to be added to
 `fastbootDependencies`.
@@ -410,8 +410,8 @@ it in FastBoot-only initializers.
 ### Defer Rendering of Async Components
 
 An Ember.js app running in the browser is long-lived: as soon as the
-page loads, you can start rendering parts of the UI as they become
-available.
+page loads, you can start rendering parts of the UI as soon as the data
+driving that UI becomes available.
 
 Ember starts by collecting the models for each route on screen (via
 `Route`'s `model()`, `beforeModel()`, and `afterModel()` hooks). If any
@@ -430,22 +430,21 @@ specific contact. So, once the `model()` hook finishes loading for the
 route, the template is rendered, and the sidebar shows a loading spinner
 while the full list is loaded.
 
-<img src="images/contacts-example.png" width="437" height="662">
+<img src="images/contacts-example.png" width="991">
 
-In the browser, the route hierarchy's model hooks resolving controls
-when the template is rendered. But you can always render immediately
-without data and have each component on the page update onces its
-backing data becomes available.
+In the browser, the router's promise chain controls when the template is
+rendered. But you can always render immediately (by not returning a
+promise) and have each component on the page update onces its backing
+data becomes available.
 
 FastBoot is different. Because it's sending a static page of HTML to the
 user's browser, it needs to know when the page is "done." As soon as
-FastBoot thinks the page is done rendering, it converts the DOM into a
-string of HTML, sends it to the browser, and destroys the application
-instance.
+FastBoot thinks the page is done rendering, it converts the DOM into
+HTML, sends it to the browser, and destroys the application instance.
 
 Like when deciding when to render a route's templates, FastBoot uses the
-promise chain built by traversing routes' `beforeModel()`, `model()`,
-and `afterModel()` hooks. But if some components are responsible for
+promise chain built by routes' `beforeModel()`, `model()`, and
+`afterModel()` hooks. But if some components are responsible for
 marshalling their own data, they may render too late for the HTML
 response and the user (or the search crawler!) may see the loading state
 instead of the content you intended.
@@ -457,15 +456,19 @@ the components on the page.
 
 For example, let's imagine we're building a news page that also has a
 weather widget. In the browser, we load the primary model (the article)
-in the `model()` hook, but let the weather component render a loading
-spinner if the article loads before the weather data.
+in the `model()` hook. The weather component fetches data from a
+`weather` service.
+
+In the browser, we let the weather component render a loading spinner if
+the article loads before the weather data. But in FastBoot, we block
+rendering until the weather data is available.
 
 Here's what the `Route` for that page might look like:
 
 ```js
 // app/routes/article.js
-import Route from "ember-route";
-import injectService from "ember-service/inject";
+import Route from 'ember-route';
+import injectService from 'ember-service/inject';
 
 export default Route.extend({
   fastboot: injectService(),
@@ -511,14 +514,14 @@ Server-side rendering, or SSR, is a relatively new idea. Because it's so
 new, there are often misconceptions about how it works. Let's start by
 defining what SSR is not.
 
-**FastBoot does not replace your existing server.**
+**FastBoot does not replace your existing API server.**
 Instead, FastBoot drops in on top of your existing API server to
 improve startup performance and make your Ember app more accessible
 to user agents without JavaScript.
 
-Perhaps the best way to think about FastBoot is that it is like a browser
-running in your datacenter. This browser already has your Ember application
-loaded and running.
+Perhaps the best way to think about FastBoot is that it is like a
+browser running in a data center instead of on a user's device. This
+browser already has your Ember application loaded and running.
 
 When a request comes in from an end user, the browser in the datacenter is
 told to visit the same URL. Because it is already running, there is little
@@ -629,3 +632,9 @@ Alternatively, you can store session data for users in stateful persistence
 on the server, such as a Redis instance. When the request comes in, you will
 need to exchange a cookie for the full user session. We hope that the community
 can work together to build a robust solution to this scenario.
+
+## Security Issues
+
+If you discover a security vulnerability in FastBoot, we ask that you
+follow Ember.js' [responsible disclosure security
+policy](http://www.emberjs.com/security).
