@@ -16,15 +16,15 @@
       quickstart guide</a>.
     </p>
     <p>Install Ember by running:</p>
-    <div class="command-prompt">
+    {{#command-prompt}}
       npm install ember-cli -g
-    </div>
+    {{/command-prompt}}
     <p>
       Create a new application by running:
     </p>
-    <div class="command-prompt">
+    {{#command-prompt}}
       ember new github-fastboot-example
-    </div>
+    {{/command-prompt}}
     <p>
       Once created, <code>cd</code> into the
       <code>github-fastboot-example</code> directory.
@@ -45,9 +45,9 @@
     <p>
       Run the following command to install <code>ember-network</code>:
     </p>
-    <div class="command-prompt">
+    {{#command-prompt}}
       ember install ember-network
-    </div>
+    {{/command-prompt}}
     <p>
       Under the hood, the <code>ember install</code> command is just like <code>npm install</code>, but automatically
       saves the addon to your <code>package.json</code> file.
@@ -63,9 +63,9 @@
     <p>
     Run the following command in your terminal:
     </p>
-    <div class="command-prompt">
+    {{#command-prompt}}
       ember generate route index
-    </div>
+    {{/command-prompt}}
     <p>
      This will generate a new route called <code>index</code>. By convention,
      <code>index</code> is the name of the route for when the user visits the root
@@ -115,9 +115,9 @@
 
     <p>Once you've made those changes (don't forget to save!), switch back to the terminal
     and run the development server:</p>
-    <div class="command-prompt">
+    {{#command-prompt}}
       ember server
-    </div>
+    {{/command-prompt}}
     <p>
       This runs a local development server you can use to verify your program is
       running correctly. Visit <a href="http://localhost:4200/">localhost:4200/</a>
@@ -135,15 +135,15 @@
     <h3>Install FastBoot</h3>
     <p>Back in the terminal, stop the development server by hitting <code>Ctrl-C</code> on your keyboard.</p>
     <p>Next, install FastBoot:</p>
-    <div class="command-prompt">
+    {{#command-prompt}}
       ember install ember-cli-fastboot
-    </div>
+    {{/command-prompt}}
     <p>
       Let's turn on server-side rendering and make sure it works. Start the FastBoot server like this:
     </p>
-    <div class="command-prompt">
+    {{#command-prompt}}
       ember fastboot --serve-assets
-    </div>
+    {{/command-prompt}}
     <p>The <code>--serve-assets</code> option tells the FastBoot server to serve CSS, JavaScript and images in addition to
     just rendering the HTML.</p>
     <p>View the FastBoot-rendered content by visiting <a href="http://localhost:3000/">localhost:3000/</a>. Note the different port!
