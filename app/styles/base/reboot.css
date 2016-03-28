@@ -5,14 +5,26 @@
 }
 
 body {
-  color: #333;
+  color: #6F7C82;
   font-family: var(--font-family);
+  line-height: 1.5;
+  font-size: var(--font-size);
 }
 
 a {
-  border-bottom: 1px solid #EEE;
+  border-bottom: 2px solid #EFF3F6;
   color: var(--link-color);
   text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #292E31;
+  margin: 2em 0 0.5em;
 }
 
 h1 {
