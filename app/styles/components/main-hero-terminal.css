@@ -1,0 +1,25 @@
+.main-hero-terminal {
+  background: rgba(0, 0, 0, 0.33);
+  border-radius: 0.25em;
+  color: #8A9DBF;
+}
+
+.main-hero-terminal .faded {
+  color: rgba(255, 255, 255, 0.1);
+}
+
+.main-hero-terminal .orange {
+  color: #FFA91B;
+}
+
+.main-terminal .purple {
+  color: var(--purple);
+}
+
+.main-hero-terminal-traffic-light {
+  background: rgba(0, 0, 0, 0.33);
+  border-radius: 50%;
+  height: 14px;
+  margin-right: 0.25rem;
+  width: 14px;
+}
