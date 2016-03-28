@@ -4,6 +4,7 @@
 @import "base/reboot";
 
 @import "components/main-hero";
+@import "components/main-hero-terminal";
 
 :root {
   --white: white;
