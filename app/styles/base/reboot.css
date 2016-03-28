@@ -5,16 +5,27 @@
 }
 
 body {
+  color: #333;
   font-family: var(--font-family);
 }
 
 a {
-  color: var(--dark-purple);
+  border-bottom: 1px solid #EEE;
+  color: var(--link-color);
   text-decoration: none;
 }
 
 h1 {
   font-size: var(--h1);
+  font-weight: 300;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
 }
 
 h2 {
