@@ -19,17 +19,24 @@
   font-weight: normal;
 }
 
+.main-hero-requirements {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: var(--h6);
+  text-align: center;
+}
+
 .main-hero-actions {
   text-align: center;
 }
 
 .main-hero-button {
   border: 2px solid;
+  border-radius: 0.25em;
   color: var(--green);
   display: inline-block;
   font-weight: 600;
   min-width: 10em;
-  padding: 0.75em 2em;
+  padding: 0.55em 2em 0.75em;
   text-align: center;
   text-decoration: none;
 }
