@@ -8,6 +8,11 @@ body {
   font-family: var(--font-family);
 }
 
+a {
+  color: var(--dark-purple);
+  text-decoration: none;
+}
+
 h1 {
   font-size: var(--h1);
 }
