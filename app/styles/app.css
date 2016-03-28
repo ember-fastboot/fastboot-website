@@ -13,8 +13,9 @@
   --green: #52ECC7;
   --purple: #8692FF;
 
-  --link-color: #0085BD;
+  --link-color: #7972CE;
 
   --font-family: "tablet-gothic", "Helvetica Neue", Arial, sans-serif;
   --monospace-font-family: Menlo, Meslo, Monaco, monospace;
+  --font-size: 18px;
 }

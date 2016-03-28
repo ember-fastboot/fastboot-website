@@ -1,6 +1,7 @@
 .main-hero {
   align-items: center;
   background: linear-gradient(135deg, #182848, #4B6CB7);
+  border: 12px solid #102235;
   color: var(--white);
   display: flex;
   font-size: 1.125rem;
@@ -9,15 +10,19 @@
 }
 
 .main-hero-logo {
+  color: inherit;
   font-weight: 300;
   font-style: italic;
+  margin: 0;
 }
 
 .main-hero-slogan {
   color: var(--purple);
   font-size: var(--h3);
   font-weight: normal;
+  margin: 0;
 }
+
 
 .main-hero-requirements {
   color: rgba(255, 255, 255, 0.25);
