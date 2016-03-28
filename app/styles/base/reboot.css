@@ -63,3 +63,8 @@ h6 {
 code {
   font-family: var(--monospace-font-family);
 }
+
+img,
+svg {
+  max-width: 100%;
+}

@@ -4,6 +4,7 @@
 @import "base/reboot";
 
 @import "components/command-prompt";
+@import "components/fastboot-logo";
 @import "components/main-hero";
 @import "components/main-hero-terminal";
 

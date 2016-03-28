@@ -19,8 +19,10 @@
 .main-hero-slogan {
   color: var(--purple);
   font-size: var(--h3);
+  font-style: italic;
   font-weight: normal;
   margin: 0;
+  text-transform: lowercase;
 }
 
 
