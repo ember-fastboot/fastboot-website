@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('architecture');
   this.route('philosophy');
   this.route('deploying');
+  this.route('doc', { path: '*path' });
 });
 
 export default Router;
