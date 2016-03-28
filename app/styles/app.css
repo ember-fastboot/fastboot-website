@@ -1,3 +1,6 @@
+@import "normalize.css";
+@import "basscss";
+
 @import "nav-bar.css";
 
 * {
