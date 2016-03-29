@@ -9,6 +9,11 @@
 @import "components/main-hero-terminal";
 @import "components/syntax";
 
+.mx-auto {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 :root {
   --dark-gray: #111;
   --white: white;
