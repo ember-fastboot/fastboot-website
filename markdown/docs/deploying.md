@@ -12,7 +12,7 @@ Heroku, deploying a new version of your app is as simple as typing `git
 push heroku`.
 
 To add the Heroku buildpack to your project, see
-[heroku-buildpack-ember-cli-deploy](https://github.com/heroku/heroku-buildpack-ember-cli-deploy).
+[heroku-buildpack-emberjs](https://github.com/heroku/heroku-buildpack-emberjs).
 
 ## AWS Elastic Beanstalk
 
@@ -51,7 +51,7 @@ middleware you can add to your own HTTP server.
 
 ### Deploying Your App
 
-When you build your Ember app via `ember build`, it will compile your
+When you build your Ember app via `ember build`, it will compile
 everything into the `dist` directory. Upload this `dist` directory to your
 server. It is the "build artifact" that contains the current version of
 your application ready to run in both Node.js and the browser.
