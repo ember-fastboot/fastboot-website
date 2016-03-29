@@ -37,6 +37,7 @@
 }
 
 .main-hero-button {
+  margin: 0 13px;
   border: 2px solid;
   border-radius: 0.25em;
   color: var(--green);

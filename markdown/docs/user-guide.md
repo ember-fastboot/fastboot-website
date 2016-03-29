@@ -573,7 +573,7 @@ then starts up a local server.
 Once you've confirmed everything looks good, it's ready to hand off to
 the FastBoot server running in the production environment. The good news
 is that this process is usually handled for you by a deployment plugin
-for `ember-cli-deploy`; see [Deploying](#deploying) for more
+for `ember-cli-deploy`; see [Deploying](/docs/deploying) for more
 information about different deployment strategies.
 
 ### The FastBoot Server

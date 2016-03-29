@@ -4,8 +4,9 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   var prepend = '';
+
   if ('FASTLY_CDN_URL' in process.env) {
-    prepend = `https://${process.env.FASTLY_CDN_URL}/`;
+    prepend = 'https://' + process.env.FASTLY_CDN_URL + '/';
   }
 
   var app = new EmberApp(defaults, {
