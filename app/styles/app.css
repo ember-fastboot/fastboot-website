@@ -9,9 +9,11 @@
 @import "components/main-hero-terminal";
 @import "components/syntax";
 
-.mx-auto {
-  padding-left: 10px;
-  padding-right: 10px;
+@media screen and (max-width: 48em) {
+  .mx-auto {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 
 :root {
