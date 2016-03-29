@@ -7,6 +7,7 @@
 @import "components/fastboot-logo";
 @import "components/main-hero";
 @import "components/main-hero-terminal";
+@import "components/syntax";
 
 :root {
   --dark-gray: #111;
