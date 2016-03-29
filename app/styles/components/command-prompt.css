@@ -1,7 +1,13 @@
-.command-prompt {
+.command-prompt, pre, code {
   background: #EFF3F6;
   border-radius: 0.25em;
   font-family: var(--monospace-font-family);
+}
+
+pre {
+  overflow: auto;
+  padding: 1rem;
+  white-space: pre;
 }
 
 .command-prompt-body:before {
