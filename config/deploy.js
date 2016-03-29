@@ -6,7 +6,14 @@ module.exports = function(deployTarget) {
     gzip: {
       ignorePattern: '{fastboot/*.js,*.json}',
       keep: true
+    },
+
+    appshell: {
+      excludePattern: '{robots.txt,crossdomain.xml}',
+      externalDependencies: [],
+      prefixDomains: {}
     }
+
     // include other plugin configuration that applies to all deploy targets here
   };
 

@@ -9,6 +9,10 @@ module.exports = function(defaults) {
   }
 
   var app = new EmberApp(defaults, {
+    // For ember-cli-deploy-appshell
+    autoRun: false,
+    _ignoreMissingLoader: true,
+
     postcssOptions: {
       plugins: [
         {
@@ -31,6 +35,7 @@ module.exports = function(defaults) {
         }
       ]
     },
+
     fingerprint: {
       prepend: prepend
     }
