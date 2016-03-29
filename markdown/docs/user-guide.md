@@ -546,8 +546,8 @@ post.
 
 ### Packaging Your App
 
-When you run <code>ember build</code> at the command line, Ember compiles
-your application into the <code>dist</code> directory. That directory
+When you run `ember build` at the command line, Ember compiles
+your application into the `dist` directory. That directory
 contains everything you need to make your application work in the browser.
 You can upload it to a static hosting service like S3 or Firebase, where
 browsers can download and run the JavaScript on the user's device.
@@ -557,11 +557,9 @@ renders HTML on the server and therefore needs more than just static hosting.
 We need to produce a build of the Ember app that's designed to work in
 Node.js rather than the browser.
 
-<p class="note">
-  One of our goals is to one day produce a "universal" build of an Ember app
-  that runs in both environments, to make release tracking easier. But for
-  right now, you will need to manage two builds.
-</p>
+One of our goals is to one day produce a "universal" build of an Ember app
+that runs in both environments, to make release tracking easier. But for
+right now, you will need to manage two builds.
 
 That's just what the `ember fastboot:build` command does. It
 creates a compiled version of your application with browser-specific code
@@ -575,7 +573,7 @@ then starts up a local server.
 Once you've confirmed everything looks good, it's ready to hand off to
 the FastBoot server running in the production environment. The good news
 is that this process is usually handled for you by a deployment plugin
-for <code>ember-cli-deploy</code>; see [Deploying](#deploying) for more
+for `ember-cli-deploy`; see [Deploying](#deploying) for more
 information about different deployment strategies.
 
 ### The FastBoot Server
