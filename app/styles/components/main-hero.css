@@ -48,3 +48,14 @@
   text-align: center;
   text-decoration: none;
 }
+
+.main-hero-terminal pre,
+.main-hero-terminal code {
+  background: none;
+  border-radius: 0;
+  font-family: monospace;
+}
+.main-hero-terminal pre {
+  padding: 0;
+  white-space: normal;
+}
