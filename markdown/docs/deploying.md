@@ -58,7 +58,7 @@ your application ready to run in both Node.js and the browser.
 
 Once you've uploaded `dist` to your server, you need to run `npm
 install` inside. The `dist` directory contains a `package.json` that
-contains all of dependencies needed to run your app in Node.js. Running
+contains all of the dependencies needed to run your app in Node.js. Running
 `npm install` makes sure they get installed correctly.
 
 Make sure that you install npm modules in `dist` **before** uploading
