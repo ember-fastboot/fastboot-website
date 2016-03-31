@@ -35,7 +35,7 @@ Lambda is not recommended for serving directly to users, due to
 unpredictable response times, but is a perfect fit for pre-rendering or
 serving to search crawlers.
 
-For more about deploying FastBoot to Lambda, see [Bustle Labs' 
+For more about deploying FastBoot to Lambda, see [Bustle Labs'
 Lambda ember-cli-deploy plugin](https://github.com/bustlelabs/ember-cli-deploy-fastboot-lambda).
 
 ## Custom Server
@@ -70,13 +70,13 @@ the same OS and CPU architecture on both your local machine and server.
 
 On your server, install the FastBoot server package globally:
 
-```
+```sh
 npm install -g ember-fastboot-server
 ```
 
 Once installed, you can start the HTTP server by running:
 
-```
+```sh
 ember-fastboot path/to/dist --port 80
 ```
 
