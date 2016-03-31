@@ -1,3 +1,4 @@
+/* global FastBoot */
 import Ember from 'ember';
 import markdownFiles from 'ember-fr-markdown-file/markdownFiles';
 
