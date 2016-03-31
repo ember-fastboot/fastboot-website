@@ -10,7 +10,7 @@ pre {
   white-space: pre;
 }
 
-.command-prompt-body:before {
+.command-prompt-body:before, .language-sh:before {
   color: #C6D1DA;
   content: '$ ';
 }
