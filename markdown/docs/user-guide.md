@@ -13,7 +13,7 @@ the JavaScript files fail to load.
 FastBoot is an addon you can add to existing Ember CLI apps. To
 FastBoot-enable your application, run:
 
-```
+```sh
 ember install ember-cli-fastboot
 ```
 
@@ -24,14 +24,14 @@ your application's `package.json`.
 
 You can start a FastBoot server on your development machine by running:
 
-```
+```sh
 ember fastboot
 ```
 
 This starts a FastBoot server listening on port 3000. You can verify
 it's working by curling from `localhost`:
 
-```
+```sh
 curl http://localhost:3000
 ```
 
@@ -44,7 +44,7 @@ to kill the server and restart it.
 You can run the development server on a different port by passing the
 `--port` argument:
 
-```
+```sh
 ember fastboot --port 4567
 ```
 
@@ -55,7 +55,7 @@ your app is automatically included when you run `ember build`. As with
 any other Ember build, you'll want to build for the production
 environment when deploying for your users to use:
 
-```
+```sh
 ember build --environment production
 ```
 
@@ -98,7 +98,7 @@ seamlessly in both environments.
 
 To use `ember-network`, install it as you would any addon:
 
-```
+```sh
 ember install ember-network
 ```
 
@@ -137,7 +137,7 @@ To control the title that gets displayed for a route (i.e., the
 `<title>` tag), install the FastBoot-compatible
 `ember-cli-document-title` addon:
 
-```
+```sh
 ember install ember-cli-document-title
 ```
 
@@ -167,7 +167,7 @@ dynamically by your Ember app.
 
 To get started, install the `ember-cli-head` addon:
 
-```
+```sh
 ember install ember-cli-head
 ```
 
@@ -179,7 +179,7 @@ For example, to set the title used when embedding a route in Facebook
 (or any other Open Graph-compatible app), add the appropriate `<meta>`
 tag to `head.hbs`:
 
-```handlebars
+```hbs
 {{!-- app/templates/head.hbs --}}
 <meta property="og:title" content={{model.title}} />
 ```
