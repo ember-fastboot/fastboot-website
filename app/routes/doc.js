@@ -5,8 +5,8 @@ import markdownFiles from 'ember-fr-markdown-file/markdownFiles';
 const { get } = Ember;
 
 export default Ember.Route.extend({
-  activate: function() {
-    this._super();
+  afterModel: function() {
+    this._super(...arguments);
     if (typeof FastBoot === 'undefined') {
       window.scrollTo(0, 0);
     }
