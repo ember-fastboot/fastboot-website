@@ -1,4 +1,7 @@
 import Ember from 'ember';
+import markdownFiles from 'ember-fr-markdown-file/markdownFiles';
+
+const { get } = Ember;
 
 export default Ember.Route.extend({
   init() {
@@ -17,5 +20,8 @@ export default Ember.Route.extend({
         }
       }.bind(this));
     }
+  },
+  model() {
+    return get(markdownFiles, 'intro');
   }
 });

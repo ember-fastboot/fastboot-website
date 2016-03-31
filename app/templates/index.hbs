@@ -1,70 +1,7 @@
 {{main-hero}}
 
-<div class="max-width-3 mx-auto">
-  <div class="p1">
-    <section id="how-does-it-work">
-      <h3 class="center">How Does It Work?</h3>
-
-      <p>
-        FastBoot works by running your Ember application in Node.js. When a
-        user visits your site, the initial HTML is rendered and served to the user.
-        The very first thing they see is your content.
-      </p>
-
-      <p>
-        Only after the content has loaded do they start downloading JavaScript.
-        Once finished, your app takes over. You get the same snappy performance
-        you're used to from Ember apps.
-      </p>
-
-      <p>
-        And yes, this means the content in your Ember application is accessible
-        to everyone, even if they have JavaScript turned off. It's even
-        accessible to cURL&mdash;try it yourself:
-      </p>
-
-      {{#command-prompt}}
-        curl http://www.ember-fastboot.com
-      {{/command-prompt}}
-
-      <p>
-        For more information, see <a href="/docs/user-guide">the User Guide</a>.
-      </p>
-    </section>
-
-    <section id="running-fastboot">
-      <h3>Running FastBoot</h3>
-
-      <p>To start the FastBoot server during development:</p>
-
-      {{#command-prompt}}
-        ember fastboot
-      {{/command-prompt}}
-
-      <p>
-        For more information, see the <a href="/quickstart">Quickstart</a>.
-      </p>
-    </section>
-
-    <section id="get-help-and-contribute">
-      <h3>Get Help &amp; Contribute</h3>
-      <p>
-        The FastBoot source code is <a href="https://github.com/tildeio/ember-cli-fastboot">available on GitHub</a>.
-        If you run into an error, please <a href="https://github.com/emberjs/ember.js/issues">file an issue</a>
-      </p>
-      <p>
-        The best way to get help is via the <a href="https://ember-community-slackin.herokuapp.com/">Ember Community Slack</a>.
-        Once you've signed up, join the <code>#-fastboot</code> channel.
-      </p>
-    </section>
-
-    <section id="the-road-to-1.0">
-      <h3>The Road to FastBoot 1.0</h3>
-      <p>
-        FastBoot is currently pre-1.0 software and under active development. You can track progress to FastBoot 1.0
-        by visiting the <a href="https://github.com/tildeio/ember-cli-fastboot/issues/98">Road to 1.0</a> GitHub issue.
-      </p>
-    </section>
-
-  </div>
+<div class="p1">
+  <section class="max-width-3 mx-auto">
+    {{md-text text=model html=true typographer=true linkify=true}}
+  </section>
 </div>
