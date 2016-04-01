@@ -6,10 +6,6 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
-    googleFonts: [
-      'Bitter:400',
-      'Bitter:700'
-    ],
     metricsAdapters: [
       {
         name: 'GoogleAnalytics',
