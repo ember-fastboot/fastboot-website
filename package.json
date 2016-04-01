@@ -46,6 +46,7 @@
     "ember-fastboot-server": "hone/ember-fastboot-server#static-gzip",
     "ember-fr-markdown-file": "0.0.0",
     "ember-load-initializers": "^0.5.1",
+    "ember-metrics": "0.6.0",
     "ember-remarkable": "2.1.0",
     "ember-resolver": "^2.0.3",
     "loader.js": "^4.0.1",
