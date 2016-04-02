@@ -1,0 +1,7 @@
+<h1>Oops, that page doesn't exist!</h1>
+<h2>Try one of these:</h2>
+<ul>
+  {{#each availablePages as |page|}}
+    <li>{{link-to page 'page' page}}</li>
+  {{/each}}
+</ul>

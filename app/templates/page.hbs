@@ -1,0 +1,9 @@
+<div class="p1">
+  <section class="max-width-3 mx-auto">
+    {{#if model}}
+      {{md-text text=model html=true typographer=true linkify=true}}
+    {{else}}
+      {{route-error}}
+    {{/if}}
+  </section>
+</div>

@@ -14,7 +14,7 @@ export default Ember.Route.extend({
             if (target.pathname === '/') {
               this.transitionTo('index');
             } else {
-              this.transitionTo('doc', target.pathname.replace(/^\//, ''));
+              this.transitionTo('page', target.pathname.replace(/^\//, ''));
             }
           }
         }
