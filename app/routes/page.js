@@ -5,6 +5,6 @@ const { get } = Ember;
 
 export default Ember.Route.extend({
   model(params) {
-    return get(markdownFiles, params.path.replace(/\//g, '.'));
+    return get(markdownFiles, params.path.replace(/\//g, '.')) || null;
   }
 });
