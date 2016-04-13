@@ -290,6 +290,34 @@ export default Route.extend({
 });
 ```
 
+In order to access cookies in a way that works both in the browser as well as
+in the FastBoot server, use
+[ember-cookies](https://github.com/simplabs/ember-cookies) and the `cookies`
+service it exposes:
+
+```js
+import Route from 'ember-route';
+import fetch from 'ember-network/fetch';
+import injectService from 'ember-service/inject';
+
+export default Route.extend({
+  fastboot: injectService(),
+  cookies: injectService(),
+
+  model(params) {
+    let authToken = this.get('cookies').read('auth');
+    let options = {
+      headers: {
+        'X-Auth-Token': authToken
+      }
+    };
+
+    return fetch(`http://api.example.com/users/${params.user_id}`, options)
+      .then(r => r.json());
+  }
+});
+```
+
 ### Check the Current Host
 
 You can access the hostname of the current FastBoot server via the
