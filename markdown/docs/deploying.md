@@ -29,7 +29,7 @@ Lambda is an AWS service for running Node.js functions without a server.
 You can deploy your Ember app as a FastBoot Lambda function, so you
 don't have to worry about provisioning servers at all; Amazon will
 autoscale based on load. You can serve FastBoot results over HTTP by
-combing Lambda with API Gateway.
+combining Lambda with API Gateway.
 
 Lambda is not recommended for serving directly to users, due to
 unpredictable response times, but is a perfect fit for pre-rendering or
