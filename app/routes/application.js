@@ -1,11 +1,14 @@
 import Ember from 'ember';
 import markdownFiles from 'ember-fr-markdown-file/markdownFiles';
+import injectService from 'ember-service/inject';
 
 const { get } = Ember;
 
 export default Ember.Route.extend({
+  fastboot: injectService(),
+
   init() {
-    if (typeof FastBoot === 'undefined') {
+    if (!get(this, 'fastboot.isFastBoot')) {
       Ember.$(document).on('click', 'a', function(e) {
         if (!e.ctrlKey && !e.metaKey && e.target.target !== '_blank') {
           let target = e.target || e.currentTarget;
