@@ -1,4 +1,3 @@
-/* global FastBoot */
 import Ember from 'ember';
 import config from './config/environment';
 import injectService from 'ember-service/inject';
@@ -6,12 +5,13 @@ import injectService from 'ember-service/inject';
 const { get, run } = Ember;
 
 const Router = Ember.Router.extend({
+  fastboot: injectService(),
   location: config.locationType,
   metrics: injectService(),
 
   didTransition() {
     this._super(...arguments);
-    if (typeof FastBoot === 'undefined') {
+    if (!get(this, 'fastboot.isFastBoot')) {
       window.scrollTo(0, 0);
       this._trackPage();
     }
