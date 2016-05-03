@@ -1,22 +1,23 @@
----
 language: node_js
 node_js:
-  - "4"
-
+- '4'
 sudo: false
-
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 before_install:
-  - npm config set spin false
-  - npm install -g bower
-  - npm install phantomjs-prebuilt
-
+- npm config set spin false
+- npm install -g bower
+- npm install phantomjs-prebuilt
 install:
-  - npm install
-  - bower install
-
+- npm install
+- bower install
 script:
-  - npm test
+- npm test
+deploy:
+  provider: heroku
+  api_key:
+    secure: h/bnJe7rqFXmSXB3Es7m/6+wSf7WTVcLTopKnVrfvutcvWMn92kuGana3nuskautqeen7HC+eKqxKUhERjEaF5ZXN0Wkz6RLC2TOMcKhBkWuj5JZHR3InJLKFUJnC1AynBeXgKaWZhiAzfeIiCnkypkHvzOfAuFeqHtKPtNxgUZhBecM+UeYZF6YgnpG0A32oDT+2QW8Z/tIDNEbu7V+2zZgZgeicRlG+qR1XzkcY+OQh/hRZcK2R/ytgv4lRcYYe/GiqFYevw86WaGchFTo1ofm/3XEpdZXI/KgP14pPI2H939ibHeWZJ6uGSDZEX4Bnkvd7zjGlbIIoCDhHirKlp4keQ429PRm8fsvhHk/v5L7BsyZOO+WlLd/HR7bDTz6BNKkw5fHNxH9pljIN2mbfnPzugY4FjGya5uRe7bqoYaNFfkwcpjsUsgBHsLwxq+XbrvgFy3I3ey12uJ4t49ezCtRKX+GPabLB/4Z15W7jidnSM/K/1DW43SN7YAciVdRGBHLRYsi/SuoZl3Jz+IDP1K4hpnPG89mezB0BtObP+TAQStVzDf+I5a6p332+hcUjmjOQbjeKMNaQ96ytTh6+Cn6Zy/nsg4T7d6hdtzi/Md+8bPuo/3eAhY431ByI9UHA2/JSjvGwGFhWMmeb0QbC3xA4oK2YrGgAYJo9jN+QyE=
+  app: fastboot-website
+  on:
+    repo: ember-fastboot/fastboot-website
