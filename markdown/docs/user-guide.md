@@ -63,7 +63,7 @@ ember build --environment production
 Deploy][ember-cli-deploy].** There are a number of FastBoot-compatible
 deploy plugins, with more being authored every day.
 
-[ember-cli-deploy]: http://ember-cli.com/ember-cli-deploy/
+[ember-cli-deploy]: http://ember-cli-deploy.github.io/ember-cli-deploy/
 
 Manual deployment is slow and error-prone, and even if you have a custom
 deployment process, writing an Ember CLI Deploy plugin is
