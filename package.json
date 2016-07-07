@@ -57,6 +57,7 @@
   "dependencies": {
     "express": "^4.13.4",
     "express-cluster": "0.0.4",
+    "express-sabayon": "hone/express-sabayon",
     "express-serve-static-gzip": "hone/express-serve-static-gzip",
     "fastboot-express-middleware": "^1.0.0-beta.7"
   }
