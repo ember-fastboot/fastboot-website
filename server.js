@@ -6,6 +6,7 @@ const cluster = require('express-cluster');
 const fastbootMiddleware = require('fastboot-express-middleware');
 const parseArgs = require('minimist');
 const staticGzip = require('express-serve-static-gzip');
+const sabayon = require('express-sabayon');
 
 var assetPath = 'tmp/deploy-dist'
 var port = process.env.PORT || 3000;
@@ -38,6 +39,7 @@ cluster(function() {
     app.use(express.static(assetPath));
   }
 
+  app.get(sabayon.path, sabayon.middleware());
   app.get('/*', fastboot);
 
   var listener = app.listen(port, function() {
