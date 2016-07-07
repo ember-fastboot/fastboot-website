@@ -31,7 +31,7 @@
     "ember-cli-deploy": "0.6.1",
     "ember-cli-deploy-build": "0.1.1",
     "ember-cli-deploy-gzip": "0.2.3",
-    "ember-cli-fastboot": "0.6.2",
+    "ember-cli-fastboot": "^1.0.0-beta.4",
     "ember-cli-head": "0.0.5",
     "ember-cli-htmlbars": "^1.0.3",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
@@ -43,7 +43,6 @@
     "ember-cli-uglify": "^1.2.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.5",
-    "ember-fastboot-server": "0.7.2",
     "ember-fr-markdown-file": "0.0.0",
     "ember-load-initializers": "^0.5.1",
     "ember-metrics": "0.6.1",
@@ -54,5 +53,11 @@
     "postcss-custom-media": "^5.0.1",
     "postcss-custom-properties": "^5.0.0",
     "postcss-import": "^8.0.2"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "express-cluster": "0.0.4",
+    "express-serve-static-gzip": "hone/express-serve-static-gzip",
+    "fastboot-express-middleware": "^1.0.0-beta.7"
   }
 }
