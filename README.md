@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ember-fastboot/fastboot-website.svg?branch=master)](https://travis-ci.org/ember-fastboot/fastboot-website)
+
 # Fastboot-website
 
 This README outlines the details of collaborating on this Ember application.
