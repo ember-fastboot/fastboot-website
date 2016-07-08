@@ -14,3 +14,10 @@ install:
 - bower install
 script:
 - ember test
+deploy:
+  provider: heroku
+  api_key:
+    secure: iduQwr4SumssmTXAsg2DSgwpmrL7PTf01uk0cqETBG1y2puGswAiWyNSHiswHWFhpvFhCQDkcG+S4L2Geq7luOFhBXcUWpDO6ZuN2mj+MnpFfGbQMNbXF9OwZrkyzPgi3R4cQbm7wrvvGQYBhCC0JMdgl3w+GjfofgxOYNaWtBVlLkXaFz5EylD9pr3OYjIYPt7rT/8E3R2TBqrDxhESXYm+SKSUti8QX4AugsDA9vAr562kjzze0LYMmnyUVSeoBUtj4wBoEY9/z+3tAS6SpUxpivJKEuJXK4b+iZT0hPokAp5SJXH6hsZDK3QrjAvAZcaNgcwLnV7HyLtpYZjZ39O75FNoRcXDjP/pEkiKwx5X+KLEYjH/+vM9JIYJaiRpjeETIb3KjJBKYejT++d0NQP1gdOxgtRvZIMYAGc5TAjiKUFH0MjEXjGo0pfT2lv9/eif5yFbf11wO8i7YzUQaTvBCRy8PKG7ah1kDOlfMGf3H8Vy6QHD5fEgVbcgaGh/0t51iTSVt7JaB8SEBdKRx3fhNoSQAsyzAaNA8Hx+CgIXE0Spt2qhV5VQc2hgAYEwUeNj3zfCo1zRUkRzpYOLH8Vrl0ViB136Kjox+AdFMbRpAp89ePBZnces/xDkANTf3RfUNHV5rQjn57fpLwI/fcV7Rclo7k0cmMWoZE2BhOk=
+  app: fastboot-website
+  on:
+    repo: ember-fastboot/fastboot-website
