@@ -6,6 +6,10 @@
 
 .main-hero-terminal .faded {
   color: rgba(255, 255, 255, 0.1);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .main-hero-terminal .orange {
