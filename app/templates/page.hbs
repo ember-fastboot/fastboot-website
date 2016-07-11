@@ -1,10 +1,12 @@
 <div class="p1">
   {{main-nav}}
-  <section class="max-width-3 mx-auto">
-    {{#if model}}
-      {{md-text text=model html=true typographer=true linkify=true}}
-    {{else}}
-      {{route-error}}
-    {{/if}}
-  </section>
+  {{#liquid-bind model as |currentModel|}}
+    <section class="max-width-3 mx-auto">
+      {{#if currentModel}}
+        {{md-text text=currentModel html=true typographer=true linkify=true}}
+      {{else}}
+        {{route-error}}
+      {{/if}}
+    </section>
+  {{/liquid-bind}}
 </div>
