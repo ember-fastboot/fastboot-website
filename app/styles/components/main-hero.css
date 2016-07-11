@@ -16,6 +16,10 @@
   margin: 0;
 }
 
+.main-hero .fastboot-logo {
+  padding: 50px 0;
+}
+
 .main-hero-slogan {
   color: var(--purple);
   font-size: var(--h3);

@@ -15,6 +15,12 @@ a {
   border-bottom: 2px solid #EFF3F6;
   color: var(--link-color);
   text-decoration: none;
+  transition: color 0.3s var(--easeOutQuint);
+}
+a:hover,
+a:focus {
+  color: var(--green);
+  transition-duration: 0.1s;
 }
 
 h1,

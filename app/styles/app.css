@@ -7,6 +7,7 @@
 @import "components/fastboot-logo";
 @import "components/main-hero";
 @import "components/main-hero-terminal";
+@import "components/main-nav";
 @import "components/syntax";
 
 :root {
@@ -16,6 +17,8 @@
   --purple: #8692FF;
 
   --link-color: #7972CE;
+
+  --easeOutQuint: cubic-bezier(0.230, 1.000, 0.320, 1.000);
 
   --font-family: "tablet-gothic", "Helvetica Neue", Arial, sans-serif;
   --monospace-font-family: Menlo, Meslo, Monaco, monospace;
