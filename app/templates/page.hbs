@@ -1,6 +1,6 @@
-{{#liquid-bind model as |currentModel|}}
-  <div class="p1">
-    {{main-nav}}
+<div class="p1">
+  {{main-nav}}
+  {{#liquid-bind model as |currentModel|}}
     <section class="max-width-3 mx-auto">
       {{#if currentModel}}
         {{md-text text=currentModel html=true typographer=true linkify=true}}
@@ -8,5 +8,5 @@
         {{route-error}}
       {{/if}}
     </section>
-  </div>
-{{/liquid-bind}}
+  {{/liquid-bind}}
+</div>
