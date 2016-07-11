@@ -1,0 +1,7 @@
+.main-nav a.active {
+  color: var(--green);
+}
+.main-nav .fastboot-logo {
+  margin: 20px 0;
+  fill: #292E31;
+}
