@@ -8,6 +8,10 @@
   color: rgba(255, 255, 255, 0.1);
 }
 
+.main-hero-terminal .faded:before {
+    content: '$';
+}
+
 .main-hero-terminal .orange {
   color: #FFA91B;
 }
