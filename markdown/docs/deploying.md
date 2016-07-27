@@ -61,7 +61,7 @@ install` inside. The `dist` directory contains a `package.json` that
 contains all of the dependencies needed to run your app in Node.js. Running
 `npm install` makes sure they get installed correctly.
 
-Make sure that you install npm modules in `dist` **before** uploading
+Make sure that you install npm modules in `dist` **after** uploading
 `dist` to your server. Any npm packages that have native dependencies
 are unlikely to work if compiled ahead of time, unless you're running
 the same OS and CPU architecture on both your local machine and server.
