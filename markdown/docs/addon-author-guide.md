@@ -4,15 +4,15 @@ If you're the author of an Ember addon, you might need to make some
 changes to ensure that your addon runs correctly in the FastBoot
 environment.
 
-Remember that when updating your addons for FastBoot compatibility,
-your code now must run in both a browser *and* Node.js. Most
-importantly, that means that you cannot just assume that there will
-always be DOM APIs available.
+Remember that when updating your addons for FastBoot compatibility, your
+code now must run in both a browser *and* Node.js. Most importantly,
+that means that you cannot assume that DOM APIs will always be
+available.
 
 ## Don't Break the Boot
 
 The first step towards FastBoot support is ensuring that your addon
-doesn't cause the app to crash when run in Node. You can verify this by
+doesn't cause the app to crash when it is run in Node. You can verify this by
 adding your addon to a new Ember app, adding the FastBoot addon, and
 running the FastBoot server with `ember fastboot`.
 
@@ -38,7 +38,7 @@ Node, this value is not set.
 ### Tracking It Down
 
 FastBoot works by turning an Ember application and all of its
-dependencies (including your addon) into a single bundle of JavaScript.
+dependencies, including your addon, into a single bundle of JavaScript.
 Similar to how you ship an `app.js` and `vendor.js` file to the browser
 when you deploy an Ember app, the FastBoot server also loads these two
 files.
@@ -47,8 +47,8 @@ What this means in practice is that errors will include stack traces
 with very large line numbers. Your addon's code will be intermingled
 with other addons, and Ember itself, in the `vendor.js` file.
 
-To figure out what is causing the exception to be thrown, look at the
-stack trace shown when running the app. Note the line number, then open
+To find the cause of the exception, look at the stack trace shown when
+running the app. Note the line number, then open
 `dist/fastboot/vendor.js` in your text editor. Scroll down to the
 provided line number (or, better, use your editor's "Go to Line"
 functionality) to pinpoint exactly which line is causing the issue.
@@ -94,7 +94,7 @@ our component file that's shared across all instances of the component:
 
 ```js
 // addon/components/resizable-component.js
-import Component from "ember-component";
+import Ember from "ember";
 import $ from "jquery";
 
 let componentsToNotify = [];
@@ -102,7 +102,7 @@ $(window).on('resize', () => {
   componentsToNotify.forEach(c => c.windowDidResize());
 });
 
-export default Component.extend({
+export default Ember.Component.extend({
   init() {
     componentsToNotify.push(this);
   },
@@ -112,7 +112,12 @@ export default Component.extend({
   },
 
   willDestroy() {
-    componentsToNotify.removeObject(this);
+    for (let i = 0; i < componentsToNotify.length; i++) {
+      if (componentsToNotify[i] === this) {
+        componentsToNotify.splice(i, 1);
+        break;
+      }
+    }
   }
 });
 ```
@@ -129,7 +134,7 @@ and never in Node).
 
 ```js
 // addon/components/resizable-component.js
-import Component from "ember-component";
+import Ember from "ember";
 import $ from "jquery";
 
 let componentsToNotify = [];
@@ -142,7 +147,7 @@ function setupListener() {
   });
 }
 
-export default Component.extend({
+export default Ember.Component.extend({
   didInsertElement() {
     if (!didSetupListener) { setupListener(); }
     componentsToNotify.push(this);
@@ -153,7 +158,12 @@ export default Component.extend({
   },
 
   willDestroy() {
-    componentsToNotify.removeObject(this);
+    for (let i = 0; i < componentsToNotify.length; i++) {
+      if (componentsToNotify[i] === this) {
+        componentsToNotify.splice(i, 1);
+        break;
+      }
+    }
   }
 });
 ```
@@ -173,16 +183,16 @@ the [CodeMirror code editor](https://codemirror.net/) in a component
 that makes it easy to drop into an Ember app.
 
 Sometimes the library your addon uses is itself incompatible with
-Node.js. When you include it in your `ember-cli-build.js` file, you
-include code that will prevent the app from running in FastBoot.
+Node.js. When you include the library in your `ember-cli-build.js` file,
+you include code that will prevent the app from running in FastBoot.
 
 If your addon imports third-party code and you are unable to make
 changes to it to add Node compatibility, you can add a guard to your
 `ember-cli-build.js` file to only include it in the browser build.
 
 The FastBoot addon sets the `EMBER_CLI_FASTBOOT` environment variable
-when it is building the FastBoot version of the application. You can use
-this to prevent the inclusion of a library at build time:
+when it is building the FastBoot version of the application. Use
+this to prevent the inclusion of a library in the FastBoot build:
 
 ```js
 if (!process.env.EMBER_CLI_FASTBOOT) {
@@ -211,9 +221,9 @@ built-in or from npm) when running in FastBoot, but only if they've been
 explicitly whitelisted first.
 
 To whitelist a dependency, you'll need to edit your addon's
-`package.json`. You probably already have an `ember-addon` field; to
-this hash, add a property called `fastBootDependencies` that contains an
-array of Node modules that may be used.
+`package.json`. You probably already have an `ember-addon` field there.
+Edit this this hash to add a property called `fastBootDependencies` that
+contains an array of Node modules that may be used.
 
 Make sure that any modules you want to access are also included in your
 `package.json`'s `dependencies` field.
@@ -276,19 +286,17 @@ Instead, you can write a computed property that uses the low-level
 `getOwner` functionality to lookup the `fastboot` service directly:
 
 ```js
-import getOwner from "ember-owner/get";
-import Service from "ember-service";
-import computed from "ember-computed";
+import Ember from "ember";
 
-export default Service.extend({
+export default Ember.Service.extend({
   doSomething() {
     let fastboot = this.get('fastboot');
     if (!fastboot) { return; }
     // do something that requires FastBoot
   },
 
-  fastboot: computed(function() {
-    let owner = getOwner(this);
+  fastboot: Ember.computed(function() {
+    let owner = Ember.getOwner(this);
 
     return owner.lookup('service:fastboot');
   })
