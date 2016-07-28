@@ -44,7 +44,7 @@ when you deploy an Ember app, the FastBoot server also loads these two
 files.
 
 What this means in practice is that errors will include stack traces
-with very large line numbers. Your addon's code will be intermingled
+with very large line numbers. The code from your addon will be intermingled
 with other addons, and Ember itself, in the `vendor.js` file.
 
 To find the cause of the exception, look at the stack trace shown when
