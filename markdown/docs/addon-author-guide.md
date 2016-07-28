@@ -182,7 +182,7 @@ them easier to use from an Ember app. For example, the
 the [CodeMirror code editor](https://codemirror.net/) in a component
 that makes it easy to drop into an Ember app.
 
-Sometimes the library your addon uses is itself incompatible with
+Sometimes the library your addon wraps is itself incompatible with
 Node.js. When you include the library in your `ember-cli-build.js` file,
 you include code that will prevent the app from running in FastBoot.
 
@@ -200,6 +200,11 @@ if (!process.env.EMBER_CLI_FASTBOOT) {
   app.import('some/jquery.plugin.js')
 }
 ```
+
+Note that not including the library in the FastBoot build means that any
+modules it exports will not be available inside the app when running in
+the FastBoot environment. Make sure to guard against missing
+dependencies in that case.
 
 ## Browser-Only or Node-Only Initializers
 
