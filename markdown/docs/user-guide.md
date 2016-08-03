@@ -8,7 +8,7 @@ Users see content faster, and can view your app even if they have JavaScript dis
 
 ## How It Works
 
-FastBoot works by creating a Node process and executing your Ember Application within it.
+FastBoot works by creating a Node.js process and executing your Ember application within it.
 
 Most Ember applications should work out of the box.
 However, there are some patterns that you should be sure to follow to guarantee that your application is fully FastBoot compatible.
@@ -44,7 +44,7 @@ You can verify it's working by curling from `localhost`:
 curl http://localhost:3000
 ```
 
-You should see your index route fully rendered (as opposed to the skeletal `index.html` page Ember usually sends).
+You should see the content of your application's index template rendered in the output, instead of the empty HTML most client-side rendered apps show.
 
 To stop the server, press `Ctrl-C` on your keyboard to kill the process.
 
@@ -59,7 +59,7 @@ ember fastboot --port 4567
 
 ## Building for Production
 
-Once you've installed the FastBoot addon, a Node.js-compatible build of your app is automatically included when you run `ember build`.
+Once you've installed the FastBoot addon, a Node-compatible build of your app is automatically included when you run `ember build`.
 As with any other Ember build, you'll want to build for the production environment when deploying for your users to use:
 
 ```sh
@@ -81,7 +81,7 @@ For more information, see the [Architecture](#architecture) section.
 
 ## The FastBoot Service
 
-FastBoot registers the `fastboot` service which you can inject into your application:
+FastBoot registers the `fastboot` [service](https://guides.emberjs.com/v2.7.0/applications/services/) which you can inject into your application:
 
 ```javascript
 export default Ember.Route.extend({
@@ -100,7 +100,7 @@ Property         | Description
 `response`       | The FastBoot server's response
 `request`        | The request sent to the FastBoot server
 `shoebox`        | A key/value store for passing data acquired server-side to the client
-`deferRendering` | A function that takes a `Promise` that you can use to defer the Ember Applications rendering in FastBoot
+`deferRendering` | A function that takes a `Promise` that you can use to defer the Ember application's rendering in FastBoot
 
 ### Deferring Response Rendering
 
@@ -122,6 +122,7 @@ The `fastboot.request` key allows you access to the request sent to the FastBoot
 
 You can access the current request headers via `fastboot.request`.
 The `headers` object implements part of the [Fetch API's Headers class](https://developer.mozilla.org/en-US/docs/Web/API/Headers), the functions available are [`has`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/has), [`get`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/get), and [`getAll`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/getAll).
+For more information about HTTP headers see [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers).
 
 ```javascript
 export default Ember.Route.extend({
@@ -156,6 +157,7 @@ The FastBoot service's `cookies` property is an object containing the request's 
 
 You can access the host of the request that the current FastBoot server is responding to via `fastboot.request` in the `fastboot` service.
 The `host` property will return the full `hostname` and `port` (`example.com` or `localhost:3000`).
+For example, when requesting `http://myapp.example.com/photos` from your browser, `fastboot.request.host` would equal `myapp.example.com`
 
 ```javascript
 export default Ember.Route.extend({
@@ -373,7 +375,7 @@ export default Ember.Route.extend({
 
 ### ember-network: Fetch Resources Over HTTP (AJAX)
 
-JavaScript running in the browser relies on the `XMLHttpRequest` interface to retrieve resources, while Node.js offers the `http` module.
+JavaScript running in the browser relies on the `XMLHttpRequest` interface to retrieve resources, while Node offers the `http` module.
 What do we do if we want to write a single app that can fetch data from our API server when running in both environments?
 
 One option is to use the [ember-network] addon, which provides an implementation of [Fetch API][fetch-api] standard that works seamlessly in both environments.
@@ -474,12 +476,12 @@ For more information, see [ember-cli-head].
 
 ## Tips and Tricks
 
-### Using Whitelisted Node.js Dependencies
+### Using Whitelisted Node Dependencies
 
-The browser and Node.js are two different environments, and functionality in one is not always available in the other.
+The browser and Node are two different environments, and functionality in one is not always available in the other.
 As you develop your app, you may need to pull in additional dependencies to provide for functionality not available by default in Node.
 
-For example, `localStorage` is not available in Node.js and you may instead want to save information to a Redis server by using the `radredis` npm packge.
+For example, `localStorage` is not available in Node and you may instead want to save information to a Redis server by using the `radredis` npm packge.
 
 For security reasons, your Ember app running in FastBoot can only access packages (both built-in and from npm) that you have explicitly whitelisted.
 
@@ -506,7 +508,7 @@ The `fastbootDependencies` in the above example means the only modules your Embe
 
 If the package you are using is not built in to Node, **you must also specify the package and a version in the `package.json` `dependencies` hash.** Built-in modules (`path`, `fs`, etc.) only need to be added to `fastbootDependencies`.
 
-From your Ember.js app, you can run `FastBoot.require()` to require a package.
+From your Ember app, you can run `FastBoot.require()` to require a package.
 This is identical to the CommonJS `require` except it checks all requests against the whitelist first.
 
 ```javascript
@@ -523,7 +525,7 @@ You should either guard against its presence or only use it in FastBoot-only ini
 
 ### Use Model Hooks to Defer Rendering
 
-An Ember.js app running in the browser is long-lived: as soon as the page loads, you can start rendering parts of the UI as soon as the data driving that UI becomes available.
+An Ember app running in the browser is long-lived: as soon as the page loads, you can start rendering parts of the UI as soon as the data driving that UI becomes available.
 
 Ember starts by collecting the models for each route on screen (via `Route`'s `model()`, `beforeModel()`, and `afterModel()` hooks).
 If any of your routes return a promise from one of these hooks, Ember will wait until those promises resolve before rendering the templates.
@@ -598,7 +600,7 @@ If your components have any direct DOM manipulation you would do it in those hoo
 
 #### Lifecycle Hooks in FastBoot
 
-FastBoot calls the `init`, `didReceiveAttrs`, `didUpdateAttrs`, `willRender` and `willUpdate`.
+FastBoot calls the `init`, `didReceiveAttrs`, `didUpdateAttrs`, `willRender` and `willUpdate` hooks.
 Any code in these hooks will be run inside of FastBoot and should be free of references to browser APIs or DOM manipulation.
 
 ### Avoid jQuery
@@ -610,9 +612,9 @@ jQuery is [disabled](https://github.com/emberjs/ember.js/blob/v2.7.0/packages/em
 
 If you are depending on jQuery for XHR requests, use [ember-network](https://github.com/tomdale/ember-network) and replace your `$.ajax` calls with `fetch` calls.
 
-## Troubleshooting in Node.js
+## Troubleshooting in Node
 
-Because your app is now running in Node.js, not the browser, you will need a new set of tools to help diagnose problems.
+Because your app is now running in Node, not the browser, you will need a new set of tools to help diagnose problems.
 
 ### Verbose Logging
 
@@ -701,7 +703,7 @@ That directory contains everything you need to make your application work in the
 You can upload it to a static hosting service like S3 or Firebase, where browsers can download and run the JavaScript on the user's device.
 
 FastBoot is a little different because, instead of being purely static, it renders HTML on the server and therefore needs more than just static hosting.
-We need to produce a build of the Ember app that's designed to work in Node.js rather than the browser.
+We need to produce a build of the Ember app that's designed to work in Node rather than the browser.
 
 When you run `ember build`, your FastBooted app will produce differnet artifact sets in `dist/` and `dist/fastboot`.
 The artifacts in `dist` are client-side copies of your application that will be sent to all browsers that request your application.
@@ -715,7 +717,8 @@ The good news is that this process is usually handled for you by a deployment pl
 ### The FastBoot Server
 
 The [FastBoot server][fastboot-server] is the heart of the FastBoot architecture.
-The server offers an [Express middleware][express] that can be integrated into an existing Node.js infrastructure, or run standalone.
+
+The server offers an [Express middleware][express] that can be integrated into an existing Node infrastructure, or run standalone.
 
 ```javascript
 var server = new FastBootServer({
@@ -743,10 +746,10 @@ _Does this mean I need to rewrite my API server in Ember or JavaScript?_
 
 No.
 FastBoot works with your existing API rather than replacing it.
-That means you can drop in FastBoot no matter what backend you use, whether it's Node.js, Rails, PHP, .NET, Java, or any other stack.
+That means you can drop in FastBoot no matter what backend you use, whether it's Node, Rails, PHP, .NET, Java, or any other stack.
 
-That said, the FastBoot server _does_ require Node.js.
-So even though you don't need to replace your backend, you do need to have the ability to deploy Node.js apps.
+That said, the FastBoot server _does_ require Node.
+So even though you don't need to replace your backend, you do need to have the ability to deploy Node apps.
 
 _If the app is running in FastBoot and not the user's browser, how do I access things like `localStorage` where I keep authentication tokens?_
 
@@ -759,7 +762,7 @@ We hope that the community can work together to build a robust solution to this 
 
 ## Security Issues
 
-If you discover a security vulnerability in FastBoot, we ask that you follow Ember.js' [responsible disclosure security policy](http://www.emberjs.com/security).
+If you discover a security vulnerability in FastBoot, we ask that you follow Ember' [responsible disclosure security policy](http://www.emberjs.com/security).
 
 ## Useful Links
 
