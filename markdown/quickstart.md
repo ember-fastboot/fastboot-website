@@ -1,10 +1,10 @@
 # FastBoot Quickstart
 
-### Creating a New Ember App
+## Creating a New Ember App
 
 This quickstart guide will walk you through creating a simple Ember app that fetches data from GitHub, then renders it using FastBoot.
 
-To start, make sure you've got Node.js and npm installed. If you've never used Ember before, you may want to run through the [Ember quickstart guide](https://guides.emberjs.com/v2.3.0/getting-started/quick-start/).
+To start, make sure you've got Node.js and npm installed. If you've never used Ember before, you may want to run through the [Ember quickstart guide](https://guides.emberjs.com/v2.7.0/getting-started/quick-start/).
 
 Install Ember by running:
 
@@ -32,7 +32,7 @@ ember install ember-network
 
 Under the hood, the `ember install` command is just like `npm install`, but automatically saves the addon to your `package.json` file.
 
-### Rendering the Model
+## Rendering the Model
 
 In Ember, routes are objects responsible for fetching model data. Let's make a route that fetches information about you from GitHub.
 
@@ -50,7 +50,7 @@ We'll use the `fetch` polyfill exposed by the `ember-network` addon that lets us
 
 Implement the model hook like I did below. You might want to change the username in the URL from mine to yours.
 
-```js
+```javascript
 import Ember from 'ember';
 import fetch from 'ember-network/fetch';
 
@@ -92,7 +92,7 @@ We've verified we've got a working application, but there's one problem. If you 
 
 ![Screenshot showing that the HTML does not contain the application contents](/images/quickstart/github-fastboot-example-empty-source.png)
 
-### Install FastBoot
+## Install FastBoot
 
 Back in the terminal, stop the development server by hitting `Ctrl-C` on your keyboard.
 
@@ -120,9 +120,9 @@ Congratulations! You've just built your first FastBoot application.
 
 Let's review what we've accomplished here:
 
-1.  We created a new app in one command with `ember new`
-2.  We used the universal library `ember-network` to request AJAX data
-3.  When rendering in Node.js, the FastBoot server requested data from GitHub _on the user's behalf_
-4.  We wrote an app that has the benefits of traditional server-side rendering **and** the benefits of client-side JavaScript, in a single codebase. No hacks, just installing an addon.
+1. We created a new app in one command with `ember new`
+2. We used the universal library `ember-network` to request AJAX data
+3. When rendering in Node.js, the FastBoot server requested data from GitHub _on the user's behalf_
+4. We wrote an app that has the benefits of traditional server-side rendering **and** the benefits of client-side JavaScript, in a single codebase. No hacks, just installing an addon.
 
 Now that you've got your first FastBoot app, it's time to start adding FastBoot to your existing apps. Or, learn how to deploy your new app by learning about [Deploying](/docs/deploying).
