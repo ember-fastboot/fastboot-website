@@ -325,6 +325,7 @@ issues:
   ember-cli-head](https://github.com/ronco/ember-cli-head/pull/1)
 * [Fastboot compatibility -
   ember-gestures](https://github.com/runspired/ember-gestures/pull/56)
+* [Fastboot compatibility - ember-wormhole](https://github.com/yapplabs/ember-wormhole/pull/54)
 
 ## Getting Help
 
