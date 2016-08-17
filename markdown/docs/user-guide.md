@@ -541,7 +541,7 @@ So, once the `model()` hook finishes loading for the route, the template is rend
 ![](images/contacts-example.png)
 
 In the browser, the router's promise chain controls when the template is rendered.
-But you can always render immediately (by not returning a promise) and have each component on the page update onces its backing data becomes available.
+But you can always render immediately (by not returning a promise) and have each component on the page update once its backing data becomes available.
 
 FastBoot is different.
 Because it's sending a static page of HTML to the user's browser, it needs to know when the page is "done." As soon as FastBoot thinks the page is done rendering, it converts the DOM into HTML, sends it to the browser, and destroys the application instance.
@@ -605,7 +605,7 @@ Any code in these hooks will be run inside of FastBoot and should be free of ref
 
 ### Avoid jQuery
 
-FastBoot relies on [`Ember.ApplicationInstance`](http://emberjs.com/api/classes/Ember.ApplicationInstance.html) to execute your Ember applicaiton on the server.
+FastBoot relies on [`Ember.ApplicationInstance`](http://emberjs.com/api/classes/Ember.ApplicationInstance.html) to execute your Ember application on the server.
 jQuery is [disabled](https://github.com/emberjs/ember.js/blob/v2.7.0/packages/ember-application/lib/system/application-instance.js#L370) by default for these instances because most of jQuery depends on having full DOM access.
 
 ### Use `ember-network` for XHR requests
@@ -705,9 +705,9 @@ You can upload it to a static hosting service like S3 or Firebase, where browser
 FastBoot is a little different because, instead of being purely static, it renders HTML on the server and therefore needs more than just static hosting.
 We need to produce a build of the Ember app that's designed to work in Node rather than the browser.
 
-When you run `ember build`, your FastBooted app will produce differnet artifact sets in `dist/` and `dist/fastboot`.
+When you run `ember build`, your FastBooted app will produce different artifact sets in `dist/` and `dist/fastboot`.
 The artifacts in `dist` are client-side copies of your application that will be sent to all browsers that request your application.
-The artifacts in `dist/fastbot` are used by the FastBoot Server to SSR your page.
+The artifacts in `dist/fastboot` are used by the FastBoot Server to SSR your page.
 
 You can test that the process is working (and that your app is FastBoot-compatible) by running `ember fastboot`, which builds your app then starts up a local server.
 
