@@ -333,7 +333,7 @@ module.exports = function(environment) {
 ```
 
 FastBoot will look for this file in your `dist/` directory when serving your application.
-You can put your custom html file in your application's `public/` directory, and `ember-cli` will
+You can put your custom html file in your application's `public/` directory and `ember-cli` will
 copy it to the correct location in the `dist/` directory when building. This should be a standard HTML file
 (no handlebars) with comment placeholders `<!-- EMBER_CLI_FASTBOOT_HEAD -->` and
 `<!-- EMBER_CLI_FASTBOOT_BODY -->` that FastBoot will replace with your application's `<head>` and `<body>` content, respectively.
