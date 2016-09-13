@@ -313,6 +313,31 @@ export default Ember.Route.extend({
 FastBoot handles `200`, [`204` and `3xx`](https://github.com/ember-fastboot/fastboot/blob/b62e795c8c21c4a5dca09f2cf20e4367c843fc7b/src/result.js#L27-L43) by default.
 For other custom responses you will want to modify your application and FastBoot server implementation to act accordingly.
 
+### Using a different index.html file
+
+FastBoot's default behavior is to inject HTML that your application has rendered into the `<head>` and `<body>` sections of the application's `index.html` file.
+In some cases you may want to use different HTML boilerplate for your application. For instance, [AMP](https://www.ampproject.org/) pages have a rigid structure
+that they must adhere to, so if you are using Ember to generate a valid AMP page you will need to change the `index.html` file that FastBoot uses.
+To do so, specify an `htmlFile` in your application's `config/environment.js`:
+
+```javascript
+module.exports = function(environment) {
+  var ENV = {
+    // ...
+
+    fastboot: {
+      htmlFile: 'custom-index.html'
+    }
+  };
+};
+```
+
+FastBoot will look for this file in your `dist/` directory when serving your application.
+You can put your custom html file in your application's `public/` directory and `ember-cli` will
+copy it to the correct location in the `dist/` directory when building. This should be a standard HTML file
+(no handlebars) with comment placeholders `<!-- EMBER_CLI_FASTBOOT_HEAD -->` and
+`<!-- EMBER_CLI_FASTBOOT_BODY -->` that FastBoot will replace with your application's `<head>` and `<body>` content, respectively.
+
 ### The Shoebox
 
 The Shoebox lets you pass application state from your FastBoot rendered application to the browser for client-side rendering.
