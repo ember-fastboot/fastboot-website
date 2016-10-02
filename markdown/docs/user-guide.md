@@ -172,10 +172,8 @@ export default Ember.Route.extend({
 
 Retrieving `host` will error on 2 conditions:
 
-1.
-You do not have a `hostWhitelist` defined.
-2.
-The `Host` header does not match an entry in your `hostWhitelist`.
+1. You do not have a `hostWhitelist` defined.
+2. The `Host` header does not match an entry in your `hostWhitelist`.
 
 ##### The Host Whitelist
 
