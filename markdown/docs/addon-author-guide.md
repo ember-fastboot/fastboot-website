@@ -227,7 +227,7 @@ explicitly whitelisted first.
 
 To whitelist a dependency, you'll need to edit your addon's
 `package.json`. You probably already have an `ember-addon` field there.
-Edit this this hash to add a property called `fastBootDependencies` that
+Edit this this hash to add a property called `fastbootDependencies` that
 contains an array of Node modules that may be used.
 
 Make sure that any modules you want to access are also included in your
@@ -247,7 +247,7 @@ this:
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "fastBootDependencies": [
+    "fastbootDependencies": [
       "path",
       "redis"
     ]
