@@ -623,7 +623,7 @@ If your components have any direct DOM manipulation you would do it in those hoo
 
 #### Lifecycle Hooks in FastBoot
 
-FastBoot calls the `init`, `didReceiveAttrs`, `didUpdateAttrs`, `willRender` and `willUpdate` hooks.
+FastBoot calls the `init`, `didReceiveAttrs`, `didUpdateAttrs`, and `willDestroy` hooks.
 Any code in these hooks will be run inside of FastBoot and should be free of references to browser APIs or DOM manipulation.
 
 ### Avoid jQuery
