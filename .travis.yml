@@ -1,19 +1,22 @@
 language: node_js
 node_js:
-- '5'
+- '6'
 sudo: false
 cache:
+  yarn: true
   directories:
-  - node_modules
+    - $HOME/.cache # includes bowers cache
 before_install:
-- npm config set spin false
-- npm install -g bower
-- npm install phantomjs-prebuilt
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH=$HOME/.yarn/bin:$PATH
+  - yarn global add bower phantomjs-prebuilt
+  - bower --version
+  - phantomjs --version
 install:
-- npm install
-- bower install
+  - yarn
+  - bower install
 script:
-- ember test
+  - yarn test
 deploy:
   provider: heroku
   api_key:
