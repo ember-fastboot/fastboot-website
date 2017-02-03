@@ -81,7 +81,7 @@ Next, let's render that model in the `index` template. Open `app/templates/index
 Once you've made those changes (don't forget to save!), switch back to the terminal and run the development server:
 
 ```sh
-ember server
+ember serve
 ```
 
 This runs a local development server you can use to verify your program is running correctly. Visit [localhost:4200/](http://localhost:4200/) in your browser. You should see your GitHub profile rendered below a title that says "Welcome to Ember.js".
