@@ -119,16 +119,16 @@ Property         | Description
 `response`       | The FastBoot server's response
 `request`        | The request sent to the FastBoot server
 `shoebox`        | A key/value store for passing data acquired server-side to the client
-`deferRendering` | A function that takes a `Promise` that you can use to defer the Ember application's rendering in FastBoot
+`deferRendering` | A function that takes a `Promise` that you can use to defer sending the response to allow asynchronous rerendering
 
 ### Deferring Response Rendering
 
 By default, FastBoot waits for the `beforeModel`, `model`, and `afterModel` hooks to resolve before sending a response back to the client.
-You can use these hooks to defer rendering of your application.
+You can use these hooks to defer the initial rendering of your application.
 See [Use Model Hooks to Defer Rendering](#use-model-hooks-to-defer-rendering).
 
 If you have asynchronous code that runs outside of these lifecycle hooks, you will want to use `deferRendering` to block the response. `deferRendering` function accepts a `Promise` and will chain all promises passed to it.
-FastBoot will wait for these promises to resolve before sending the response to the client.
+FastBoot will wait for these promises to resolve, allowing the app to rerender itself based on new data coming in asynchronously before sending the response to the client. 
 
 You must call `deferRendering` before these model hooks complete.
 For example, if you made an asynchronous call in a Component, you would use `deferRendering` in the `init` lifecycle hook.
