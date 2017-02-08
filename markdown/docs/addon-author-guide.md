@@ -206,6 +206,18 @@ modules it exports will not be available inside the app when running in
 the FastBoot environment. Make sure to guard against missing
 dependencies in that case.
 
+### How to test it
+
+Automatically testing that your addon does not break the build and that
+its components render correctly in a FastBoot environment is more demanding
+than the normal Ember tests, as it requires real end to end testing: creating 
+an Ember app that consumes your addon, serving that from a FastBoot server and
+running your tests against some real HTTP responses from that server.
+
+Fortunately you can use one of these addons which simplify these steps considerably:
+* [ember-fastboot-addon-tests](https://github.com/kaliber5/ember-fastboot-addon-tests): specifically tailored at easily testing addons for FastBoot compatibility.
+* [ember-cli-addon-tests](https://github.com/tomdale/ember-cli-addon-tests): for general testing of addons inside the context of an app. Can be used for implementing an own custom testing solution.
+
 ## Browser-Only or Node-Only Initializers
 
 If your addon requires browser-specific or Node-specific initialization
