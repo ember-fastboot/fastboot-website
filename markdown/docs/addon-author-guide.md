@@ -44,7 +44,7 @@ when you deploy an Ember app, the FastBoot server also loads these two
 files.
 
 What this means in practice is that errors will include stack traces
-with very large line numbers. Your addon's code will be intermingled
+with very large line numbers. The code from your addon will be intermingled
 with other addons, and Ember itself, in the `vendor.js` file.
 
 To find the cause of the exception, look at the stack trace shown when
@@ -227,7 +227,7 @@ explicitly whitelisted first.
 
 To whitelist a dependency, you'll need to edit your addon's
 `package.json`. You probably already have an `ember-addon` field there.
-Edit this this hash to add a property called `fastBootDependencies` that
+Edit this this hash to add a property called `fastbootDependencies` that
 contains an array of Node modules that may be used.
 
 Make sure that any modules you want to access are also included in your
@@ -247,7 +247,7 @@ this:
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "fastBootDependencies": [
+    "fastbootDependencies": [
       "path",
       "redis"
     ]
@@ -325,6 +325,7 @@ issues:
   ember-cli-head](https://github.com/ronco/ember-cli-head/pull/1)
 * [Fastboot compatibility -
   ember-gestures](https://github.com/runspired/ember-gestures/pull/56)
+* [Fastboot compatibility - ember-wormhole](https://github.com/yapplabs/ember-wormhole/pull/54)
 
 ## Getting Help
 

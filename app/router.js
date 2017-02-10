@@ -7,6 +7,7 @@ const { get, run } = Ember;
 const Router = Ember.Router.extend({
   fastboot: injectService(),
   location: config.locationType,
+  rootURL: config.rootURL,
   metrics: injectService(),
 
   didTransition() {
