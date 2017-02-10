@@ -19,7 +19,6 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-<<<<<<< HEAD
     "autoprefixer": "^6.7.2",
     "basscss": "^8.0.3",
     "broccoli-asset-rev": "^2.5.0",

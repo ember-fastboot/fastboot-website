@@ -24,7 +24,6 @@ export default Ember.Route.extend({
           }
           if (targetHost === window.location.host) {
             let [,path] = target.href.split(target.host);
-            console.log(target.hash);
             if (!target.hash) {
               e.preventDefault();
               this.transitionTo(path);
