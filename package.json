@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "ember build",
-    "start": "ember server",
+    "start": "ember fastboot --serve-assets",
     "test": "ember test"
   },
   "repository": "https://github.com/ember-fastboot/fastboot-website",
@@ -47,6 +47,7 @@
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.1.1",
     "ember-fr-markdown-file": "0.0.0",
+    "ember-href-to": "^1.11.1",
     "ember-load-initializers": "^0.6.0",
     "ember-markedjs": "^0.1.2",
     "ember-metrics": "0.6.2",
