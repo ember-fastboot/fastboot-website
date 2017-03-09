@@ -13,9 +13,24 @@ const Router = Ember.Router.extend({
   didTransition() {
     this._super(...arguments);
     if (!get(this, 'fastboot.isFastBoot')) {
-      window.scrollTo(0, 0);
+      this._scrollPage();
       this._trackPage();
     }
+  },
+
+  _scrollPage() {
+    run.scheduleOnce('afterRender', this, () => {
+      let position = 0;
+      let hash = window.location.hash;
+      if (hash) {
+        let id = hash.split('#')[1];
+        let el = document.getElementById(id);
+        if (el) {
+          position = el.getBoundingClientRect().top;
+        }
+      }
+      window.scrollTo(0, position);
+    });
   },
 
   _trackPage() {
