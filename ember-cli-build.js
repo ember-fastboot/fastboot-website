@@ -11,26 +11,29 @@ module.exports = function(defaults) {
 
   var app = new EmberApp(defaults, {
     postcssOptions: {
-      plugins: [
-        {
-          module: require('postcss-import'),
-          options: {
-            glob: true
+      compile: {
+        enabled: true,
+        plugins: [
+          {
+            module: require('postcss-import'),
+            options: {
+              glob: true
+            }
+          },
+          {
+            module: require('postcss-custom-properties')
+          },
+          {
+            module: require('postcss-custom-media')
+          },
+          {
+            module: require('autoprefixer'),
+            options: {
+              browsers: 'last 2 versions'
+            }
           }
-        },
-        {
-          module: require('postcss-custom-properties')
-        },
-        {
-          module: require('postcss-custom-media')
-        },
-        {
-          module: require('autoprefixer'),
-          options: {
-            browsers: 'last 2 versions'
-          }
-        }
-      ]
+        ]
+      }
     },
     fingerprint: {
       prepend: prepend
