@@ -1,5 +1,9 @@
 # Deploying FastBoot
 
+**NOTE**: This page is out of date, [FastBoot App Server is the current
+recommended way](https://github.com/ember-fastboot/fastboot-app-server). This section will
+be updated soon, in the meantime, please check FastBoot App Server's readme.
+
 When it comes to deploying FastBoot, there are many off-the-shelf
 options that make it easy to get it up and running in production. If
 you need something maximally flexible, it's easy to integrate the
@@ -39,6 +43,8 @@ For more about deploying FastBoot to Lambda, see [Bustle Labs'
 Lambda ember-cli-deploy plugin](https://github.com/bustlelabs/ember-cli-deploy-fastboot-lambda).
 
 ## Custom Server
+
+
 
 If one of the out-of-the-box deployment strategies doesn't work for you,
 you can adapt [the standalone FastBoot
