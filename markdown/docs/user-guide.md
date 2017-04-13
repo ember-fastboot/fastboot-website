@@ -57,6 +57,25 @@ You can run the development server on a different port by passing the `--port` a
 ember fastboot --port 4567
 ```
 
+*Note*: `ember fastboot` command is soon going to be deprecated.
+
+## Testing Locally using `ember serve`
+
+If your app is running ember-cli 2.12.0-beta.1 and above, you can now serve your FastBoot rendered content with `ember serve` as well. Moreover, all options of `ember serve` will work with FastBoot (example `--proxy`, `--port`, `--live-reload` etc). The Node server will automatically restart when you make changes.
+
+In order to serve the CSS, JavaScript, images in addition to rendering the server side content, just run:
+
+```sh
+ember serve
+```
+
+View the FastBoot-rendered by visiting [localhost:4200](http://localhost:42000/). You can alternatively also use the following curl command: `curl 'http://localhost:4200/' -H 'Accept: text/html'`.
+
+### Disabling FastBoot
+
+You can also turn off the server side rendering on a per request basis using `fastboot` query parameter. To disable FastBoot rendered content, visit [localhost:4200/?fastboot=false](http://localhost:4200/?fastboot=false). You can enable FastBoot rendered content again by visiting [localhost:4200/?fastboot=true](http://localhost:4200/?fastboot=true).
+
+
 ## Building for Production
 
 Once you've installed the FastBoot addon, a Node-compatible build of your app is automatically included when you run `ember build`.

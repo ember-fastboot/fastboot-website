@@ -110,6 +110,8 @@ ember fastboot --serve-assets
 
 The `--serve-assets` option tells the FastBoot server to serve CSS, JavaScript and images in addition to just rendering the HTML.
 
+*Note*: `ember fastboot` command is soon going to be deprecated.
+
 View the FastBoot-rendered content by visiting [localhost:3000/](http://localhost:3000/). Note the different port! This is port 3000 instead of port 4200 like before.
 
 Everything should look just the same as before. The only difference is that, this time when you View Source, the `<body>` tag is populated with the rendered HTML content.
@@ -126,3 +128,17 @@ Let's review what we've accomplished here:
 4. We wrote an app that has the benefits of traditional server-side rendering **and** the benefits of client-side JavaScript, in a single codebase. No hacks, just installing an addon.
 
 Now that you've got your first FastBoot app, it's time to start adding FastBoot to your existing apps. Or, learn how to deploy your new app by learning about [Deploying](/docs/deploying).
+
+### Running FastBoot with `ember serve`
+
+If your app is running ember-cli 2.12.0-beta.1 and above, you can now serve your FastBoot rendered content with `ember serve` as well. Moreover, all options of `ember serve` will work with FastBoot (example `--proxy`, `--port` etc).
+
+In order to serve the CSS, JavaScript, images in addition to rendering the server side content, just run:
+
+```sh
+ember serve
+```
+
+View the FastBoot-rendered by visiting [localhost:4200](http://localhost:42000/). You can alternatively also use the following curl command: `curl 'http://localhost:4200/' -H 'Accept: text/html'`.
+
+You can also turn off the server side rendering on a per request basis using `fastboot` query parameter. To disable FastBoot rendered content, visit [localhost:4200/?fastboot=false](http://localhost:4200/?fastboot=false). You can enable FastBoot rendered content again by visiting [localhost:4200/?fastboot=true](http://localhost:4200/?fastboot=true).
