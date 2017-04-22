@@ -516,6 +516,7 @@ export default Ember.Route.extend({
 
 For more information, see [ember-cli-head].
 
+<a id="tips-and-tricks"></a>
 ## Tips and Tricks
 
 ### Using Whitelisted Node Dependencies
@@ -565,6 +566,7 @@ If you attempt to require a package that is not in the whitelist, FastBoot will 
 Note that the `FastBoot` global is **only** available when running in FastBoot mode.
 You should either guard against its presence or only use it in FastBoot-only initializers.
 
+<a id="defer-rendering-with-model-hooks"></a>
 ### Use Model Hooks to Defer Rendering
 
 An Ember app running in the browser is long-lived: as soon as the page loads, you can start rendering parts of the UI as soon as the data driving that UI becomes available.
@@ -709,6 +711,7 @@ Assuming your app loads without an exception, after a few seconds you will see a
 Once you see that, you can open a connection.
 Any exceptions should be logged in the console, and you can use the tools you'd expect such as `console.log`, `debugger` statements, etc.
 
+<a id="architecture"></a>
 ## Architecture
 
 ### Introduction to Server-Side Rendering
