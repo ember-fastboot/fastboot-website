@@ -278,7 +278,7 @@ export default Ember.Route.extend({
 
 FastBoot Response gives you access to the response metadata that FastBoot will send back the client.
 
-#### Request Headers
+#### Response Headers
 
 You can access the current response headers via `fastboot.response.headers`.
 The `headers` object implements part of the [Fetch API's Headers class](https://developer.mozilla.org/en-US/docs/Web/API/Headers), the functions available are [`has`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/has), [`get`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/get), and [`getAll`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/getAll).
