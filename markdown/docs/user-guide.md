@@ -125,7 +125,7 @@ Property         | Description
 
 By default, FastBoot waits for the `beforeModel`, `model`, and `afterModel` hooks to resolve before sending a response back to the client.
 You can use these hooks to defer rendering of your application.
-See [Defer Rendering with Model Hooks](#defer-rendering-with-model-hooks).
+See [Use Model Hooks to Defer Rendering](#use-model-hooks-to-defer-rendering).
 
 If you have asynchronous code that runs outside of these lifecycle hooks, you will want to use `deferRendering` to block the response. `deferRendering` function accepts a `Promise` and will chain all promises passed to it.
 FastBoot will wait for these promises to resolve before sending the response to the client.
