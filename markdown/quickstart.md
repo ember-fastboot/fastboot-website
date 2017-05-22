@@ -52,13 +52,13 @@ Implement the model hook like I did below. You might want to change the username
 
 ```javascript
 import Ember from 'ember';
-import fetch from 'ember-fetch/fetch';
+import fetch from 'ember-fetch/ajax';
 
 export default Ember.Route.extend({
   model() {
     return fetch('https://api.github.com/users/tomdale')
       .then(function(response) {
-        return response.json();
+        return response;
       });
   }
 });

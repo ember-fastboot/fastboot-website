@@ -422,13 +422,13 @@ For example, here's an Ember route that uses `fetch()` to access the GitHub JSON
 
 ```javascript
 import Route from 'ember-route';
-import fetch from 'ember-fetch/fetch';
+import fetch from 'ember-fetch/ajax';
 
 export default Route.extend({
   model() {
     return fetch('https://api.github.com/users/tomdale/events')
       .then(function(response) {
-        return response.json();
+        return response;
       });
   }
 });
@@ -748,7 +748,7 @@ The server offers an [Express middleware][express] that can be integrated into a
 
 ```javascript
 var server = new FastBootServer({
-  appFiles: [appFile, appFile-fastboot],
+  appFiles: [appFile, appFastBootFile],
   vendorFiles: [vendorFile],
   htmlFile: htmlFile,
   ui: ui
