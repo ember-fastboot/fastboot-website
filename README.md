@@ -15,8 +15,7 @@ To run the website locally:
 - `git clone https://github.com/ember-fastboot/fastboot-website`
 - `cd fastboot-website`
 - `npm install`
-- `bower install`
-- `ember fastboot --serve-assets`
+- `ember serve`
 - Visit the app at <http://localhost:3000>.
 
 ### Running Tests
