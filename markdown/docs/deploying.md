@@ -36,7 +36,7 @@ unpredictable response times, but is a perfect fit for pre-rendering or
 serving to search crawlers.
 
 For more about deploying FastBoot to Lambda, see either [Bustle Labs'
-Lambda ember-cli-deploy plugin](https://github.com/bustlelabs/ember-cli-deploy-fastboot-lambda). Alternatively, see [ember-cli-deploy-fastboot-api-lambda](https://github.com/wytlytningNZ/ember-cli-deploy-fastboot-api-lambda) for an end-to-end lambda/api gateway hosting solution that serves both fastboot pages and static assets.
+Lambda ember-cli-deploy plugin](https://github.com/bustlelabs/ember-cli-deploy-fastboot-lambda). Alternatively, see [ember-cli-deploy-fastboot-api-lambda](https://github.com/wytlytningNZ/ember-cli-deploy-fastboot-api-lambda) for an end-to-end Lambda/API Gateway hosting solution that serves both Fastboot pages and static assets.
 
 
 ## Custom Server
