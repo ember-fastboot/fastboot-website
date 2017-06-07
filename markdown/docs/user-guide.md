@@ -403,7 +403,7 @@ export default Ember.Route.extend({
 JavaScript running in the browser relies on the `XMLHttpRequest` interface to retrieve resources, while Node offers the `http` module.
 What do we do if we want to write a single app that can fetch data from our API server when running in both environments?
 
-One option is to use the [ember-network] addon, which provides an implementation of [Fetch API][fetch-api] standard that works seamlessly in both environments.
+One option is to use the [ember-fetch](https://github.com/stefanpenner/ember-fetch) addon, which provides an implementation of [Fetch API][fetch-api] standard that works seamlessly in both environments.
 
 To use `ember-fetch`, install it as you would any addon:
 
@@ -414,7 +414,7 @@ ember install ember-fetch
 Once installed, you can import it using the JavaScript module syntax, wherever you need to make a network request:
 
 ```javascript
-import fetch from 'ember-fetch/fetch';
+import fetch from 'ember-fetch/ajax';
 ```
 
 The `fetch()` method returns a promise and is very similar to jQuery's `getJSON()` method that you are likely already using.
@@ -730,7 +730,7 @@ You can upload it to a static hosting service like S3 or Firebase, where browser
 FastBoot is a little different because, instead of being purely static, it renders HTML on the server and therefore needs more than just static hosting.
 We need to build additional assets that's designed to work in Node rather than the browser.
 
-When you run `ember build`, your FastBooted app will produce `app.js` and `vendor.js` in `dist/assets` that are used in the browser and will produce an additive asset containing FastBoot overrides for your app in `app-fastboot.js` in `dist/assets`.
+When you run `ember build`, your FastBooted app will produce `app.js` and `vendor.js` in `dist/assets` that are used in the browser and Node and will produce an additive asset containing FastBoot overrides for your app in `app-fastboot.js` in `dist/assets`.
 The artifacts in `dist/assets` are client-side copies of your application that will be sent to all browsers that request your application.
 The artifacts for your FastBoot server are defined by a `manifest` key entry in `dist/package.json` which
 will minimally contain `vendor.js`, `app.js` and `app-fastboot.js`.

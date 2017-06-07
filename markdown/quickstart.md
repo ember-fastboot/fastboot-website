@@ -131,12 +131,4 @@ Now that you've got your first FastBoot app, it's time to start adding FastBoot 
 
 If your app is running ember-cli 2.12.0-beta.1 and above, you can now serve your FastBoot rendered content with `ember serve` as well.
 
-In order to serve the CSS, JavaScript, images in addition to rendering the server side content, just run:
-
-```sh
-ember serve
-```
-
-View the FastBoot-rendered by visiting [localhost:4200](http://localhost:42000/). You can alternatively also use the following curl command: `curl 'http://localhost:4200/' -H 'Accept: text/html'`.
-
 You can also turn off the server side rendering on a per request basis using `fastboot` query parameter. To disable FastBoot rendered content, visit [localhost:4200/?fastboot=false](http://localhost:4200/?fastboot=false). You can enable FastBoot rendered content again by visiting [localhost:4200/?fastboot=true](http://localhost:4200/?fastboot=true).

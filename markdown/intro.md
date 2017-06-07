@@ -32,4 +32,4 @@ The best way to get help is via the [Ember Community Slack](https://ember-commun
 
 FastBoot is currently pre-1.0 software and under active development. You can track progress to FastBoot 1.0 by visiting the [Road to 1.0](https://github.com/ember-fastboot/ember-cli-fastboot/issues/396) GitHub issue.
 
-As addon authors or if you wish to contribute please help us in shipping in FastBoot 1.0 with helping fix addons listed in this [issue](https://github.com/ember-fastboot/ember-cli-fastboot/issues/387).
+If you wish to contribute and help in shipping FastBoot 1.0, please help us in with fixing addons listed in this [issue](https://github.com/ember-fastboot/ember-cli-fastboot/issues/387).
