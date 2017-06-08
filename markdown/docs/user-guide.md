@@ -34,42 +34,25 @@ This will install the `ember-cli-fastboot` addon via npm and save it to your app
 You can start a FastBoot server on your development machine by running:
 
 ```sh
-ember fastboot
+ember serve
 ```
 
-This starts a FastBoot server listening on port 3000\.
+This starts a FastBoot server listening on port 4200\.
 You can verify it's working by curling from `localhost`:
 
 ```sh
-curl http://localhost:3000
+curl 'http://localhost:4200/' -H 'Accept: text/html'
 ```
 
 You should see the content of your application's index template rendered in the output, instead of the empty HTML most client-side rendered apps show.
 
 To stop the server, press `Ctrl-C` on your keyboard to kill the process.
 
-Note that, at the moment, the server does not automatically restart when you make changes.
-If you make changes to your application, you'll need to kill the server and restart it.
-
-You can run the development server on a different port by passing the `--port` argument:
+You can run the development server on a different port by passing the `--port` argument or use any of `ember-cli` options:
 
 ```sh
-ember fastboot --port 4567
+ember serve --port 4567
 ```
-
-*Note*: `ember fastboot` command is soon going to be deprecated.
-
-## Testing Locally using `ember serve`
-
-If your app is running ember-cli 2.12.0-beta.1 and above, you can now serve your FastBoot rendered content with `ember serve` as well. Moreover, all options of `ember serve` will work with FastBoot (example `--proxy`, `--port`, `--live-reload` etc). The Node server will automatically restart when you make changes.
-
-In order to serve the CSS, JavaScript, images in addition to rendering the server side content, just run:
-
-```sh
-ember serve
-```
-
-View the FastBoot-rendered by visiting [localhost:4200](http://localhost:42000/). You can alternatively also use the following curl command: `curl 'http://localhost:4200/' -H 'Accept: text/html'`.
 
 ### Disabling FastBoot
 
@@ -94,7 +77,7 @@ As with a standard Ember build for the browser, compiled assets by default go in
 FastBoot adds two additions:
 
 1. `dist/package.json`, which contains metadata about your app for consumption by the FastBoot server.
-2. `dist/fastboot/`, which contains your app's compiled JavaScript that is evaluated and run by the FastBoot server.
+2. `dist/assets/`, which contains your app's compiled JavaScript that is evaluated and run by the FastBoot server (`vendor.js`, `app.js`, `app-fastboot.js`).
 
 For more information, see the [Architecture](#architecture) section.
 
@@ -415,23 +398,23 @@ export default Ember.Route.extend({
 
 ## Useful Ember Addons for FastBoot
 
-### ember-network: Fetch Resources Over HTTP (AJAX)
+### ember-fetch: Fetch Resources Over HTTP (AJAX)
 
 JavaScript running in the browser relies on the `XMLHttpRequest` interface to retrieve resources, while Node offers the `http` module.
 What do we do if we want to write a single app that can fetch data from our API server when running in both environments?
 
-One option is to use the [ember-network] addon, which provides an implementation of [Fetch API][fetch-api] standard that works seamlessly in both environments.
+One option is to use the [ember-fetch](https://github.com/stefanpenner/ember-fetch) addon, which provides an implementation of [Fetch API][fetch-api] standard that works seamlessly in both environments.
 
-To use `ember-network`, install it as you would any addon:
+To use `ember-fetch`, install it as you would any addon:
 
 ```sh
-ember install ember-network
+ember install ember-fetch
 ```
 
 Once installed, you can import it using the JavaScript module syntax, wherever you need to make a network request:
 
 ```javascript
-import fetch from 'ember-network/fetch';
+import fetch from 'ember-fetch/ajax';
 ```
 
 The `fetch()` method returns a promise and is very similar to jQuery's `getJSON()` method that you are likely already using.
@@ -439,19 +422,19 @@ For example, here's an Ember route that uses `fetch()` to access the GitHub JSON
 
 ```javascript
 import Route from 'ember-route';
-import fetch from 'ember-network/fetch';
+import fetch from 'ember-fetch/ajax';
 
 export default Route.extend({
   model() {
     return fetch('https://api.github.com/users/tomdale/events')
       .then(function(response) {
-        return response.json();
+        return response;
       });
   }
 });
 ```
 
-For more information, see [ember-network] and the [Fetch documentation on MDN][fetch-api].
+For more information, see [ember-fetch](https://github.com/stefanpenner/ember-fetch) and the [Fetch documentation on MDN][fetch-api].
 
 ### ember-cli-document-title: Specify the Page Title
 
@@ -472,7 +455,7 @@ export default Ember.Route.extend({
 });
 ```
 
-See [ember-cli-document-title] for more information.
+See [ember-cli-document-title](https://github.com/kimroen/ember-cli-document-title) for more information.
 
 ### ember-cli-head: Enable Open Graph, Twitter Cards and Other `<head>` Tags
 
@@ -514,7 +497,7 @@ export default Ember.Route.extend({
 });
 ```
 
-For more information, see [ember-cli-head].
+For more information, see [ember-cli-head](https://github.com/ronco/ember-cli-head).
 
 ## Tips and Tricks
 
@@ -650,9 +633,9 @@ Any code in these hooks will be run inside of FastBoot and should be free of ref
 FastBoot relies on [`Ember.ApplicationInstance`](http://emberjs.com/api/classes/Ember.ApplicationInstance.html) to execute your Ember application on the server.
 jQuery is [disabled](https://github.com/emberjs/ember.js/blob/v2.7.0/packages/ember-application/lib/system/application-instance.js#L370) by default for these instances because most of jQuery depends on having full DOM access.
 
-### Use `ember-network` for XHR requests
+### Use `ember-fetch` for XHR requests
 
-If you are depending on jQuery for XHR requests, use [ember-network](https://github.com/tomdale/ember-network) and replace your `$.ajax` calls with `fetch` calls.
+If you are depending on jQuery for XHR requests, use [ember-fetch](https://github.com/stefanpenner/ember-fetch) and replace your `$.ajax` calls with `fetch` calls.
 
 ## Troubleshooting in Node
 
@@ -663,7 +646,7 @@ Because your app is now running in Node, not the browser, you will need a new se
 Enable verbose logging by running the FastBoot server with the following environment variables set:
 
 ```sh
-DEBUG=ember-cli-fastboot:* ember fastboot
+DEBUG=ember-cli-fastboot:* ember serve
 ```
 
 Pull requests for adding or improving logging facilities are very welcome.
@@ -688,14 +671,14 @@ node-inspector --no-preload
 
 Once the debug server is running, you'll want to start up the FastBoot server with Node in debug mode.
 One thing about debug mode: it makes everything much slower.
-Since the `ember fastboot` command does a full build when launched, this becomes agonizingly slow in debug mode.
+Since the `ember serve` command does a full build when launched, this becomes agonizingly slow in debug mode.
 
 ### Speeding up Server-side Debugging
 
 Avoid the slowness by manually running the build in normal mode, then run FastBoot in debug mode without doing a build:
 
 ```sh
-ember build && node --debug-brk ./node_modules/.bin/ember fastboot --no-build
+ember build && node --debug-brk ./node_modules/.bin/ember serve
 ```
 
 This does a full rebuild and then starts the FastBoot server in debug mode.
@@ -745,13 +728,14 @@ That directory contains everything you need to make your application work in the
 You can upload it to a static hosting service like S3 or Firebase, where browsers can download and run the JavaScript on the user's device.
 
 FastBoot is a little different because, instead of being purely static, it renders HTML on the server and therefore needs more than just static hosting.
-We need to produce a build of the Ember app that's designed to work in Node rather than the browser.
+We need to build additional assets that's designed to work in Node rather than the browser.
 
-When you run `ember build`, your FastBooted app will produce different artifact sets in `dist/` and `dist/fastboot`.
-The artifacts in `dist` are client-side copies of your application that will be sent to all browsers that request your application.
-The artifacts in `dist/fastboot` are used by the FastBoot Server to SSR your page.
+When you run `ember build`, your FastBooted app will produce `app.js` and `vendor.js` in `dist/assets` that are used in the browser and Node and will produce an additive asset containing FastBoot overrides for your app in `app-fastboot.js` in `dist/assets`.
+The artifacts in `dist/assets` are client-side copies of your application that will be sent to all browsers that request your application.
+The artifacts for your FastBoot server are defined by a `manifest` key entry in `dist/package.json` which
+will minimally contain `vendor.js`, `app.js` and `app-fastboot.js`.
 
-You can test that the process is working (and that your app is FastBoot-compatible) by running `ember fastboot`, which builds your app then starts up a local server.
+You can test that the process is working (and that your app is FastBoot-compatible) by running `ember serve`, which builds your app then starts up a local server and renders your app on server side.
 
 Once you've confirmed everything looks good, it's ready to hand off to the FastBoot server running in the production environment.
 The good news is that this process is usually handled for you by a deployment plugin for `ember-cli-deploy`; see [Deploying](/docs/deploying) for more information about different deployment strategies.
@@ -764,8 +748,8 @@ The server offers an [Express middleware][express] that can be integrated into a
 
 ```javascript
 var server = new FastBootServer({
-  appFile: appFile,
-  vendorFile: vendorFile,
+  appFiles: [appFile, appFastBootFile],
+  vendorFiles: [vendorFile],
   htmlFile: htmlFile,
   ui: ui
 });

@@ -24,10 +24,10 @@ We need to fetch data from the GitHub API, but there's a small problem: the brow
 
 Let's install a tool that will let us write the same code whether our app is running in the browser or on the server. Code that runs in both places is sometimes called _universal_ or _isomorphic_.
 
-Run the following command to install `ember-network`:
+Run the following command to install `ember-fetch`:
 
 ```sh
-ember install ember-network
+ember install ember-fetch
 ```
 
 Under the hood, the `ember install` command is just like `npm install`, but automatically saves the addon to your `package.json` file.
@@ -46,19 +46,19 @@ This will generate a new route called `index`. By convention, `index` is the nam
 
 Open the newly-created `app/routes/index.js` file in your code editor. Let's add a method called `model()` to the route that fetches information about your user from GitHub.
 
-We'll use the `fetch` polyfill exposed by the `ember-network` addon that lets us write universal fetching code for both the browser and Node.js. A _polyfill_ is a library that provides a standardized API that isn't available in all environments yet. In this case, it's polyfilling the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+We'll use the `fetch` polyfill exposed by the `ember-fetch` addon that lets us write universal fetching code for both the browser and Node.js. A _polyfill_ is a library that provides a standardized API that isn't available in all environments yet. In this case, it's polyfilling the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
 Implement the model hook like I did below. You might want to change the username in the URL from mine to yours.
 
 ```javascript
 import Ember from 'ember';
-import fetch from 'ember-network/fetch';
+import fetch from 'ember-fetch/ajax';
 
 export default Ember.Route.extend({
   model() {
     return fetch('https://api.github.com/users/tomdale')
       .then(function(response) {
-        return response.json();
+        return response;
       });
   }
 });
@@ -102,17 +102,15 @@ Next, install FastBoot:
 ember install ember-cli-fastboot
 ```
 
-Let's turn on server-side rendering and make sure it works. Start the FastBoot server like this:
+Let's turn on server-side rendering and make sure it works. Start the FastBoot server like this if you have `ember-cli` 2.12.0 and above in your app:
 
 ```sh
-ember fastboot --serve-assets
+ember serve
 ```
 
-The `--serve-assets` option tells the FastBoot server to serve CSS, JavaScript and images in addition to just rendering the HTML.
+*Note*: `ember fastboot` command is soon going to be deprecated and removed in FastBoot 1.0. Please refrain from using it as it has live-reload and other issues
 
-*Note*: `ember fastboot` command is soon going to be deprecated.
-
-View the FastBoot-rendered content by visiting [localhost:3000/](http://localhost:3000/). Note the different port! This is port 3000 instead of port 4200 like before.
+View the FastBoot-rendered content by visiting [localhost:4200/](http://localhost:4200/). Note the same port! `ember serve` can serve render your app on server side as well. Moreover, all options of `ember serve` will work with FastBoot (example `--proxy`, `--port` etc).
 
 Everything should look just the same as before. The only difference is that, this time when you View Source, the `<body>` tag is populated with the rendered HTML content.
 
@@ -123,22 +121,14 @@ Congratulations! You've just built your first FastBoot application.
 Let's review what we've accomplished here:
 
 1. We created a new app in one command with `ember new`
-2. We used the universal library `ember-network` to request AJAX data
+2. We used the universal library `ember-fetch` to request AJAX data
 3. When rendering in Node.js, the FastBoot server requested data from GitHub _on the user's behalf_
 4. We wrote an app that has the benefits of traditional server-side rendering **and** the benefits of client-side JavaScript, in a single codebase. No hacks, just installing an addon.
 
 Now that you've got your first FastBoot app, it's time to start adding FastBoot to your existing apps. Or, learn how to deploy your new app by learning about [Deploying](/docs/deploying).
 
-### Running FastBoot with `ember serve`
+### Disabling FastBoot with `ember serve`
 
-If your app is running ember-cli 2.12.0-beta.1 and above, you can now serve your FastBoot rendered content with `ember serve` as well. Moreover, all options of `ember serve` will work with FastBoot (example `--proxy`, `--port` etc).
-
-In order to serve the CSS, JavaScript, images in addition to rendering the server side content, just run:
-
-```sh
-ember serve
-```
-
-View the FastBoot-rendered by visiting [localhost:4200](http://localhost:42000/). You can alternatively also use the following curl command: `curl 'http://localhost:4200/' -H 'Accept: text/html'`.
+If your app is running ember-cli 2.12.0-beta.1 and above, you can now serve your FastBoot rendered content with `ember serve` as well.
 
 You can also turn off the server side rendering on a per request basis using `fastboot` query parameter. To disable FastBoot rendered content, visit [localhost:4200/?fastboot=false](http://localhost:4200/?fastboot=false). You can enable FastBoot rendered content again by visiting [localhost:4200/?fastboot=true](http://localhost:4200/?fastboot=true).

@@ -14,7 +14,8 @@ available.
 The first step towards FastBoot support is ensuring that your addon
 doesn't cause the app to crash when it is run in Node. You can verify this by
 adding your addon to a new Ember app, adding the FastBoot addon, and
-running the FastBoot server with `ember fastboot`.
+running the FastBoot server with `ember serve` (provided your app is running
+`ember-cli` 2.12.0 and above).
 
 If that process results in an error and the server crashing, you know
 that your addon is trying to do something that may work in the browser
@@ -37,11 +38,11 @@ Node, this value is not set.
 
 ### Tracking It Down
 
-FastBoot works by turning an Ember application and all of its
-dependencies, including your addon, into a single bundle of JavaScript.
-Similar to how you ship an `app.js` and `vendor.js` file to the browser
-when you deploy an Ember app, the FastBoot server also loads these two
-files.
+FastBoot works by running a singular build of your application, leveraging
+the common `app.js` and `vendor.js` files in both browser and Node.
+However, in Node an additional asset `app-fastboot.js` will also be
+leveraged. This asset contains FastBoot specific overrides defined by the
+application or other addons.
 
 What this means in practice is that errors will include stack traces
 with very large line numbers. The code from your addon will be intermingled
@@ -49,7 +50,7 @@ with other addons, and Ember itself, in the `vendor.js` file.
 
 To find the cause of the exception, look at the stack trace shown when
 running the app. Note the line number, then open
-`dist/fastboot/vendor.js` in your text editor. Scroll down to the
+`dist/assets/vendor.js` in your text editor. Scroll down to the
 provided line number (or, better, use your editor's "Go to Line"
 functionality) to pinpoint exactly which line is causing the issue.
 
@@ -183,40 +184,172 @@ the [CodeMirror code editor](https://codemirror.net/) in a component
 that makes it easy to drop into an Ember app.
 
 Sometimes the library your addon wraps is itself incompatible with
-Node.js. When you include the library in your `ember-cli-build.js` file,
-you include code that will prevent the app from running in FastBoot.
+Node.js. When you include the library in your `index.js` file, you
+include code that will prevent the app from running in FastBoot.
 
 If your addon imports third-party code and you are unable to make
 changes to it to add Node compatibility, you can add a guard to your
-`ember-cli-build.js` file to only include it in the browser build.
+`index.js` file to only include it in the browser build.
 
-The FastBoot addon sets the `EMBER_CLI_FASTBOOT` environment variable
-when it is building the FastBoot version of the application. Use
-this to prevent the inclusion of a library in the FastBoot build:
+The FastBoot addon (`ember-cli-fastboot`) provides the FastBoot server a manifest of
+assets to load in the Node server. If your third-party library is not
+Node compatible, you can wrap it with a check as below in an addon:
 
 ```js
-if (!process.env.EMBER_CLI_FASTBOOT) {
-  // This will only be included in the browser build
-  app.import('some/jquery.plugin.js')
+var map = require('broccoli-stew').map;
+
+treeForVendor(defaultTree) {
+  var browserVendorLib = new Funnel(<path to your third party lib>);
+
+  browserVendorLib = map(browserVendorLib, (content) => `if (typeof FastBoot === 'undefined') { ${content} }`);
+
+  return new mergeTrees([defaultTree, browserVendorLib]);
+}
+
+included() {
+  // this file will be loaded in FastBoot but will not be eval'd
+  app.import('vendor/<third party lib file name>.js');
 }
 ```
 
-Note that not including the library in the FastBoot build means that any
+Note that not running the library in the FastBoot build means that any
 modules it exports will not be available inside the app when running in
 the FastBoot environment. Make sure to guard against missing
 dependencies in that case.
 
+## Loading additional assets in FastBoot
+
+Often your addon may require to load third party libraries that are
+specific to Node.js and only need to be loaded on the server side.
+This can include loading libraries before or after the vendor file is loaded
+in the sandbox and/or before or after the app file is loaded in the sandbox.
+Since the FastBoot manifest defines an array of vendor and app files to load
+in the sandbox, an addon can define additional vendor/app files to
+load in the sandbox as well.
+
+If your addon requires to load something in the sandbox, you can define
+the `updateFastBootManifest` hook from your addon (in `index.js`) as an example
+below:
+
+```js
+included(app) {
+  // this will copy contents of foo.js to dist/assets/foo-fastboot.js
+  app.import('node_modules/foo-package/dist/foo.js', {
+    outputFile: 'assets/foo-fastboot.js'
+  });
+
+  // this will copy contents bar.js to dist/assets/bar-fastboot.js
+  app.import('node_modules/bar-package/dist/bar.js', {
+    outputFile: 'assets/bar-fastboot.js'
+  });
+},
+
+updateFastBootManifest(manifest) {
+  /**
+   * manifest is an object containing:
+   * {
+   *    vendorFiles: [<path of the vendor file to load>, ...],
+   *    appFiles: [<path of the app file to load>, ...],
+   *    htmlFile: '<path of the base page that should be served by FastBoot>'
+   * }
+   */
+
+  // This will load the foo.js after vendor.js is loaded in Node
+  manifest.vendorFiles.push('assets/foo-fastboot.js');
+  // This will load bar.js after app-fastboot.js is loaded in the Node
+  manifest.appFiles.push('assets/bar-fastboot.js');
+
+  // remember to return the updated manifest, otherwise your build will fail.
+  return manifest;
+}
+```
+
+The above code snippet loads `foo.js` before `vendor.js` and `bar.js` after
+`app-fastboot.js` is loaded in the sandbox. You could chose to decide when you
+want to load your library. Typically you would want to load third party libraries
+`vendor.js` is loaded in Node. In such cases, you can use
+`manifest.vendorFiles.push(...)`.
+
+## Conditionally include assets in FastBoot asset
+
+Often your addon may need to conditionally include additional app trees based on ember version. Example, Ember changed an API and in order to have your addon be backward compatible for the API changes you want to include an asset when the ember version is x. For such usecases you could define the `treeForFastBoot` hook in your addon's `index.js` as below:
+
+```js
+treeForFastBoot: function(tree) {
+  let fastbootHtmlBarsTree;
+
+  // check the ember version and conditionally patch the DOM api
+  if (this._getEmberVersion().lt('2.10.0-alpha.1')) {
+    fastbootHtmlBarsTree = this.treeGenerator(path.resolve(__dirname, 'fastboot-app-lt-2-9'));
+    return tree ? new MergeTrees([tree, fastbootHtmlBarsTree]) : fastbootHtmlBarsTree;
+  }
+
+  return tree;
+},
+```
+
+The `tree` is the additional fastboot asset that gets generated and contains the fastboot overrides.
+
 ## Browser-Only or Node-Only Initializers
 
 If your addon requires browser-specific or Node-specific initialization
-code to be run, consider using the
-[fastboot-filter-initializers](https://github.com/ronco/fastboot-filter-initializers)
-Broccoli plugin. This allows you to define target-specific
-initializers just by putting them in the right directory.
+code to be run, you would need to define them seperately as follows:
 
-For example, to write an instance initializer that only runs in the
-FastBoot environment, you'd simply put it in
-`app/instance-initializers/fastboot`.
+1. Browser-Only initializers
+
+You should define an initializer under `app/initializers` or `app/instance-initializers` as normally
+you would do. The only addition would to wrap the initializer with a FastBoot environment check. This is
+to make sure the initializer does not run in FastBoot. An example is as follows:
+
+```js
+function initialize(app) {
+  if (typeof FastBoot === 'undefined') {
+    // only execute this in browser
+  }
+}
+
+export default {
+  name: 'my-initializer',
+  initialize: initializer
+}
+```
+
+2. Node-Only initializer
+
+Often you want to define Node specific behavior for your app at boot time. You should define the Node-Only
+initializer under `fastboot/initializers` or `fastboot/instance-initializers`. Note the `fastboot` directory is a sibling of the `app` or `addon` directory. The FastBoot addon (`ember-cli-fastboot`) will read the `fastboot`
+directories from all addons and your parent app and create `app-fastboot.js` which is included in the FastBoot manifest and loaded in FastBoot only. As an addon author, you just need to define the initializer
+under `fastboot` directory. An example of directory structure is as follows:
+
+```js
+-+ app/
+----+ initializers/
+--------+ foo1.js
+--------+  ...
+----+ instance-initializers/
+--------+ foo.js
+--------+  ...
+-+ fastboot/
+----+ initializers/
+--------+ foo-fastboot.js
+--------+ bar.js
+```
+
+An example of how `foo1.js` from the above example will look as:
+
+```js
+function initialize(app) {
+  // do stuff that will only run in Node
+}
+
+export default {
+  name: 'foo1',
+  initialize: initializer
+}
+```
+
+In the Node only initializer, you don't need to wrap them with any FastBoot check since the above initializer is never
+sent to the browser.
 
 ## Requiring Node Modules
 

@@ -45,8 +45,6 @@ Lambda ember-cli-deploy plugin](https://github.com/bustlelabs/ember-cli-deploy-f
 
 ## Custom Server
 
-
-
 If one of the out-of-the-box deployment strategies doesn't work for you,
 you can adapt [the standalone FastBoot
 server](https://github.com/ember-fastboot/ember-fastboot-server) to your
