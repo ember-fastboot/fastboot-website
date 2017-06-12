@@ -335,7 +335,7 @@ under `fastboot` directory. An example of directory structure is as follows:
 --------+ bar.js
 ```
 
-An example of how `foo1.js` from the above example will look as:
+An example of how `bar.js` from the above example will look as:
 
 ```js
 function initialize(app) {
@@ -343,13 +343,15 @@ function initialize(app) {
 }
 
 export default {
-  name: 'foo1',
+  name: 'bar',
   initialize: initializer
 }
 ```
 
 In the Node only initializer, you don't need to wrap them with any FastBoot check since the above initializer is never
 sent to the browser.
+
+**Note**: You could define initializers for browser and Node with the same filename and `name` property. For example, you have an initializer `foo.js` under `app/initializers/foo.js` and `fastboot/initializers/foo.js` with the initializer `name` set to `foo`. When running the app in browser, `app/initializers/foo.js` will run. When running the app in Node, `fastboot/initializers/foo.js` will run.
 
 ## Requiring Node Modules
 
