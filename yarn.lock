@@ -2906,13 +2906,6 @@ ember-export-application-global@^2.0.0:
   dependencies:
     ember-cli-babel "^6.0.0-beta.7"
 
-ember-factory-for-polyfill@^1.1.0:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/ember-factory-for-polyfill/-/ember-factory-for-polyfill-1.1.2.tgz#ea802002ec55154eea7be82abb586e77429be579"
-  dependencies:
-    ember-cli-babel "^5.1.7"
-    ember-cli-version-checker "^1.2.0"
-
 ember-fr-markdown-file@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/ember-fr-markdown-file/-/ember-fr-markdown-file-0.0.0.tgz#b875a5ed6a6ec6088881bf857b73aee531b750cb"
@@ -2923,20 +2916,12 @@ ember-fr-markdown-file@0.0.0:
     ember-cli-babel "^5.1.5"
     ember-cli-htmlbars "^1.0.1"
 
-ember-getowner-polyfill@1.1.1:
+ember-getowner-polyfill@1.1.1, ember-getowner-polyfill@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ember-getowner-polyfill/-/ember-getowner-polyfill-1.1.1.tgz#6bb6603827dd2f8f33be2434570a86cc9e5273ff"
   dependencies:
     ember-cli-babel "^5.1.6"
     ember-cli-version-checker "^1.2.0"
-
-ember-getowner-polyfill@^1.0.0:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/ember-getowner-polyfill/-/ember-getowner-polyfill-1.2.3.tgz#ea70f4a48b1c05b91056371d1878bbafe018222e"
-  dependencies:
-    ember-cli-babel "^5.1.6"
-    ember-cli-version-checker "^1.2.0"
-    ember-factory-for-polyfill "^1.1.0"
 
 ember-hash-helper-polyfill@^0.1.2:
   version "0.1.2"
