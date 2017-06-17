@@ -295,7 +295,7 @@ The `tree` is the additional fastboot asset that gets generated and contains the
 If your addon requires browser-specific or Node-specific initialization
 code to be run, you would need to define them seperately as follows:
 
-1. Browser-Only initializers
+### Browser-Only initializers
 
 You should define an initializer under `app/initializers` or `app/instance-initializers` as normally
 you would do. The only addition would to wrap the initializer with a FastBoot environment check. This is
@@ -314,7 +314,7 @@ export default {
 }
 ```
 
-2. Node-Only initializer
+### Node-Only initializer
 
 Often you want to define Node specific behavior for your app at boot time. You should define the Node-Only
 initializer under `fastboot/initializers` or `fastboot/instance-initializers`. Note the `fastboot` directory is a sibling of the `app` or `addon` directory. The FastBoot addon (`ember-cli-fastboot`) will read the `fastboot`
