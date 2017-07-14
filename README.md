@@ -2,6 +2,8 @@
 
 # FastBoot Website
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ember-fastboot/fastboot-website.svg)](https://greenkeeper.io/)
+
 This is the Ember.js app that powers the FastBoot website, <https://ember-fastboot.com>.
 
 Most of the content is authored in Markdown and can be found in the `markdown` directory.
