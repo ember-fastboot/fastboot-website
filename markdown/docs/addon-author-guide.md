@@ -217,6 +217,9 @@ modules it exports will not be available inside the app when running in
 the FastBoot environment. Make sure to guard against missing
 dependencies in that case.
 
+For apps trying to import third party libraries that are not compatible in Node, should
+create an in-repo addon within their app and follow the above guideline.
+
 ## Loading additional assets in FastBoot
 
 Often your addon may require to load third party libraries that are

@@ -7,7 +7,7 @@ Only after the content has loaded do they start downloading JavaScript. Once fin
 And yes, this means the content in your Ember application is accessible to everyone, even if they have JavaScript turned off. It's even accessible to cURL—try it yourself:
 
 ```sh
-curl http://www.ember-fastboot.com
+curl 'http://localhost:4200/' -H 'Accept: text/html'
 ```
 
 For more information, see [the User Guide](/docs/user-guide)
