@@ -27,9 +27,3 @@ For more information, see the [Quickstart](/quickstart).
 The FastBoot source code is [available on GitHub](https://github.com/tildeio/ember-cli-fastboot). If you run into an error, please [file an issue](https://github.com/emberjs/ember.js/issues)
 
 The best way to get help is via the [Ember Community Slack](https://ember-community-slackin.herokuapp.com/). Once you've signed up, join the [#-fastboot](https://embercommunity.slack.com/archives/-fastboot) channel.
-
-### The Road to FastBoot 1.0
-
-FastBoot is currently pre-1.0 software and under active development. You can track progress to FastBoot 1.0 by visiting the [Road to 1.0](https://github.com/ember-fastboot/ember-cli-fastboot/issues/396) GitHub issue.
-
-If you wish to contribute and help in shipping FastBoot 1.0, please help us in with fixing addons listed in this [issue](https://github.com/ember-fastboot/ember-cli-fastboot/issues/387).
