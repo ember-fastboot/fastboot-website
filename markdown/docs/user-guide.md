@@ -111,7 +111,7 @@ You can use these hooks to defer the initial rendering of your application.
 See [Use Model Hooks to Defer Rendering](#use-model-hooks-to-defer-rendering).
 
 If you have asynchronous code that runs outside of these lifecycle hooks, you will want to use `deferRendering` to block the response. `deferRendering` function accepts a `Promise` and will chain all promises passed to it.
-FastBoot will wait for these promises to resolve, allowing the app to rerender itself based on new data coming in asynchronously before sending the response to the client. 
+FastBoot will wait for these promises to resolve, allowing the app to rerender itself based on new data coming in asynchronously before sending the response to the client.
 
 You must call `deferRendering` before these model hooks complete.
 For example, if you made an asynchronous call in a Component, you would use `deferRendering` in the `init` lifecycle hook.
@@ -244,7 +244,7 @@ export default Ember.Route.extend({
 
 #### Protocol
 
-You can access the protocol (`http` or `https`) of the request that the current FastBoot server is responding to via `fastboot.request` in the `fastboot` service.
+You can access the protocol (`http:` or `https:`) of the request that the current FastBoot server is responding to via `fastboot.request` in the `fastboot` service.
 
 ```javascript
 export default Ember.Route.extend({
