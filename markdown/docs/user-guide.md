@@ -257,6 +257,96 @@ export default Ember.Route.extend({
 });
 ```
 
+#### Request Method
+
+You can also access the method of the request via `fastboot.request` in the `fastboot` service.
+The `method` property will return the method name (`GET`, `POST`, `PATCH`...) of the request.
+
+```javascript
+export default Ember.Route.extend({
+  fastboot: Ember.inject.service(),
+
+  model() {
+    let method = this.get('fastboot.request.method');
+    // ...
+  }
+});
+```
+
+#### Request Body
+
+On `POST`, `PUT` and `PATCH` request you will probably be interested in the body of the request.
+You can access the `body` of the request via `fastboot.request` in the `fastboot` service, but
+only of you setup a middleware to extract the body of the request in your express server.
+
+You can use `body-parser` and `fastboot-express-middleware` and to create an in-repo addon that
+contains a middleware.
+
+
+```javascript
+// your-app/lib/fastboot-middleware/index.js
+var bodyParser = require('body-parser');
+var FastBootExpressMiddleware = require('fastboot-express-middleware');
+
+module.exports = {
+  name: 'fastboot-middleware',
+
+  serverMiddleware(options) {
+    var app = options.app;
+    app.use(bodyParser.text()); // or bodyParser.json()
+    app.use(function(req, resp, next) {
+      var outputPath = process.env['EMBER_DIST_FOLDER'];
+
+      var fastbootMiddleware = FastBootExpressMiddleware({
+        distPath: outputPath
+      });
+
+      fastbootMiddleware(req, resp, next);
+    });
+  }
+};
+```
+
+```javascript
+// your-app/lib/fastboot-middleware/package.json
+{
+  "name": "post-middlware",
+  "keywords": [
+    "ember-addon"
+  ]
+}
+```
+
+Then on the `package.json` of your app you can the folder of this in-repo addon to the autodiscovery
+paths:
+
+```javascript
+// your-app/package.json
+{
+  // ...
+  "ember-addon": {
+    "paths": [
+      "lib/fastboot-middleware"
+    ]
+  }
+}
+```
+
+Now that this middleware is parsing the body of request, you can access it on the `fastboot` service.
+Depending on what method on `body-parser` you used, the body can be a parse JSON object, a string
+or even a raw Buffer.
+
+```javascript
+export default Ember.Route.extend({
+  fastboot: Ember.inject.service(),
+
+  model() {
+    let method = this.get('fastboot.request.body');
+    // ...
+  }
+});
+```
+
 ### FastBoot Response
 
 FastBoot Response gives you access to the response metadata that FastBoot will send back the client.
