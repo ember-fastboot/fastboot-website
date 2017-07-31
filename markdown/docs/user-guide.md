@@ -297,11 +297,15 @@ module.exports = {
     app.use(function(req, resp, next) {
       var outputPath = process.env['EMBER_DIST_FOLDER'];
 
-      var fastbootMiddleware = FastBootExpressMiddleware({
-        distPath: outputPath
-      });
+      if (req.serveUrl) {
+        var fastbootMiddleware = FastBootExpressMiddleware({
+          distPath: outputPath
+        });
 
-      fastbootMiddleware(req, resp, next);
+        fastbootMiddleware(req, resp, next);
+      } else {
+        next();
+      }
     });
   }
 };
