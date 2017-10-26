@@ -36,7 +36,12 @@ cluster(function() {
   if (assetPath) {
     app.get('/', fastboot);
     app.use(staticGzip(assetPath)),
-    app.use(express.static(assetPath));
+      app.use(express.static(assetPath, {
+        setHeaders(res, path, stat) {
+          res.setHeader('Cache-Control', 'public, max-age=365000000, immutable');
+          res.removeHeader('X-Powered-By');
+        }
+      }));
   }
 
   app.get(sabayon.path, sabayon.middleware());
