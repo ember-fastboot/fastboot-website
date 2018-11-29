@@ -26,4 +26,4 @@ For more information, see the [Quickstart](/quickstart).
 
 The FastBoot source code is [available on GitHub](https://github.com/tildeio/ember-cli-fastboot). If you run into an error, please [file an issue](https://github.com/emberjs/ember.js/issues)
 
-The best way to get help is via the [Ember Community Slack](https://ember-community-slackin.herokuapp.com/). Once you've signed up, join the [#-fastboot](https://embercommunity.slack.com/archives/-fastboot) channel.
+The best way to get help is via the [Ember Community Discord](https://discordapp.com/invite/zT3asNS). Once you've signed up, join the `#fastboot` channel.
