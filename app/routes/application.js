@@ -4,6 +4,6 @@ import markdownFiles from 'ember-fr-markdown-file/markdownFiles';
 
 export default Route.extend({
   model() {
-    return get(markdownFiles, 'intro');
-  }
+    return {markdown: get(markdownFiles, 'intro'), path: 'intro'};
+  },
 });

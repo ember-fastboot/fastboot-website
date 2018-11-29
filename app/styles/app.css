@@ -8,6 +8,7 @@
 @import "components/main-hero";
 @import "components/main-hero-terminal";
 @import "components/main-nav";
+@import "components/edit-link";
 @import "components/syntax";
 
 :root {
