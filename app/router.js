@@ -1,11 +1,10 @@
-import Ember from 'ember';
+import { get } from '@ember/object';
+import { run } from '@ember/runloop';
+import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
-import injectService from 'ember-service/inject';
+import { inject as injectService } from '@ember/service';
 
-const { get, run } = Ember;
-
-const Router = Ember.Router.extend({
-  fastboot: injectService(),
+const Router = EmberRouter.extend({
   location: config.locationType,
   rootURL: config.rootURL,
   metrics: injectService(),

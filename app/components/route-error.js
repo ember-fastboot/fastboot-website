@@ -1,9 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 import markdownFiles from 'ember-fr-markdown-file/markdownFiles';
 
-const { computed } = Ember;
-
-export default Ember.Component.extend({
+export default Component.extend({
   _parseObj(obj, dir) {
     let prefix = dir || '';
     let result = [];
