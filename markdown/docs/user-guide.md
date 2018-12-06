@@ -302,7 +302,7 @@ export default Route.extend({
 
 On `POST`, `PUT` and `PATCH` request you will probably be interested in the body of the request.
 You can access the `body` of the request via `fastboot.request` in the `fastboot` service, but
-only of you setup a middleware to extract the body of the request in your express server.
+only if you setup a middleware to extract the body of the request in your express server.
 
 You can use `body-parser` and `fastboot-express-middleware` and to create an in-repo addon that
 contains a middleware.
