@@ -1,9 +1,8 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
+import { get } from '@ember/object';
 import markdownFiles from 'ember-fr-markdown-file/markdownFiles';
 
-const { get } = Ember;
-
-export default Ember.Route.extend({
+export default Route.extend({
   model() {
     return get(markdownFiles, 'intro');
   }
