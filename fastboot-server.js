@@ -1,4 +1,3 @@
-/* eslint-env node */
 'use strict';
 
 const fs = require('fs');
@@ -38,8 +37,8 @@ cluster(function() {
 
   if (assetPath) {
     app.get('/', fastboot);
-    app.use(staticGzip(assetPath)),
-      app.use(express.static(assetPath));
+    app.use(staticGzip(assetPath));
+    app.use(express.static(assetPath));
   }
 
   app.get(sabayon.path, sabayon.middleware());

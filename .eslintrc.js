@@ -20,6 +20,7 @@ module.exports = {
     // node files
     {
       files: [
+        'fastboot-server.js',
         'testem.js',
         'ember-cli-build.js',
         'config/**/*.js',
