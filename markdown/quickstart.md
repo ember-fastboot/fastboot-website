@@ -51,10 +51,10 @@ We'll use the `fetch` polyfill exposed by the `ember-fetch` addon that lets us w
 Implement the model hook like I did below. You might want to change the username in the URL from mine to yours.
 
 ```javascript
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 import fetch from 'ember-fetch/ajax';
 
-export default Ember.Route.extend({
+export default Route.extend({
   model() {
     return fetch('https://api.github.com/users/tomdale')
       .then(function(response) {

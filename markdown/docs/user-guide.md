@@ -86,9 +86,13 @@ For more information, see the [Architecture](#architecture) section.
 FastBoot registers the `fastboot` [service](https://guides.emberjs.com/v2.7.0/applications/services/) which you can inject into your application:
 
 ```javascript
-export default Ember.Route.extend({
-  fastboot: Ember.inject.service(),
-  isFastBoot: Ember.computed.reads('fastboot.isFastBoot'),
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+import { reads } from '@ember/object/computed';
+
+export default Route.extend({
+  fastboot: service(),
+  isFastBoot: reads('fastboot.isFastBoot'),
 
   // ... Application code
 });
@@ -127,8 +131,11 @@ The `headers` object implements part of the [Fetch API's Headers class](https://
 For more information about HTTP headers see [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers).
 
 ```javascript
-export default Ember.Route.extend({
-  fastboot: Ember.inject.service(),
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
+export default Route.extend({
+  fastboot: service(),
 
   model() {
     let headers = this.get('fastboot.request.headers');
@@ -143,8 +150,11 @@ export default Ember.Route.extend({
 You can access cookies for the current request via `fastboot.request` in the `fastboot` service.
 
 ```javascript
-export default Ember.Route.extend({
-  fastboot: Ember.inject.service(),
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
+export default Route.extend({
+  fastboot: service(),
 
   model() {
     let authToken = this.get('fastboot.request.cookies.auth');
@@ -162,11 +172,14 @@ The `host` property will return the full `hostname` and `port` (`example.com` or
 For example, when requesting `http://myapp.example.com/photos` from your browser, `fastboot.request.host` would equal `myapp.example.com`
 
 ```javascript
-export default Ember.Route.extend({
-  fastboot: Ember.inject.service(),
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
+export default Route.extend({
+  fastboot: service(),
 
   model() {
-    let host = this.get('fastboot.request.host');
+    let host = this.fastboot.request.host;
     // ...
   }
 });
@@ -215,11 +228,14 @@ An improperly constructed `RegExp` could open your FastBoot servers and any back
 You can access query parameters for the current request via `fastboot.request` in the `fastboot` service.
 
 ```javascript
-export default Ember.Route.extend({
-  fastboot: Ember.inject.service(),
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
+export default Route.extend({
+  fastboot: service(),
 
   model() {
-    let authToken = this.get('fastboot.request.queryParams.auth');
+    let authToken = this.fastboot.request.queryParams.auth;
     // ...
   }
 });
@@ -232,11 +248,14 @@ The service's `queryParams` property is an object containing the request's query
 You can access the path (`/` or `/some-path`) of the request that the current FastBoot server is responding to via `fastboot.request` in the `fastboot` service.
 
 ```javascript
-export default Ember.Route.extend({
-  fastboot: Ember.inject.service(),
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
+export default Route.extend({
+  fastboot: service(),
 
   model() {
-    let path = this.get('fastboot.request.path');
+    let path = this.fastboot.request.path;
     // ...
   }
 });
@@ -247,11 +266,14 @@ export default Ember.Route.extend({
 You can access the protocol (`http:` or `https:`) of the request that the current FastBoot server is responding to via `fastboot.request` in the `fastboot` service.
 
 ```javascript
-export default Ember.Route.extend({
-  fastboot: Ember.inject.service(),
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
+export default Route.extend({
+  fastboot: service(),
 
   model() {
-    let protocol = this.get('fastboot.request.protocol');
+    let protocol = this.fastboot.request.protocol;
     // ...
   }
 });
@@ -263,11 +285,14 @@ You can also access the method of the request via `fastboot.request` in the `fas
 The `method` property will return the method name (`GET`, `POST`, `PATCH`...) of the request.
 
 ```javascript
-export default Ember.Route.extend({
-  fastboot: Ember.inject.service(),
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
+export default Route.extend({
+  fastboot: service(),
 
   model() {
-    let method = this.get('fastboot.request.method');
+    let method = this.fastboot.request.method;
     // ...
   }
 });
@@ -341,11 +366,14 @@ Depending on what method on `body-parser` you used, the body can be a parse JSON
 or even a raw Buffer.
 
 ```javascript
-export default Ember.Route.extend({
-  fastboot: Ember.inject.service(),
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
+export default Route.extend({
+  fastboot: service(),
 
   model() {
-    let method = this.get('fastboot.request.body');
+    let method = this.fastboot.request.body;
     // ...
   }
 });
@@ -361,14 +389,17 @@ You can access the current response headers via `fastboot.response.headers`.
 The `headers` object implements part of the [Fetch API's Headers class](https://developer.mozilla.org/en-US/docs/Web/API/Headers), the functions available are [`has`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/has), [`get`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/get), and [`getAll`](https://developer.mozilla.org/en-US/docs/Web/API/Headers/getAll).
 
 ```javascript
-export default Ember.Route.extend({
-  fastboot: Ember.inject.service(),
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
+export default Route.extend({
+  fastboot: service(),
 
   model() {
-    let isFastBoot = this.get('fastboot.isFastBoot');
+    let isFastBoot = this.fastboot.isFastBoot;
 
     if (isFastBoot) {
-      let resHeaders = this.get('fastboot.response.headers');
+      let resHeaders = this.fastboot.response.headers;
       resHeaders.set('X-Debug-Response-Type', 'fastboot');
     }
     // ...
@@ -383,18 +414,21 @@ This is useful if you want your application to return a non-default (`200`) stat
 For example if you want a route of your application to be `401 - Unauthorized` if it accessed without OAuth credentials, you could use `statusCode` to do that.
 
 ```javascript
-export default Ember.Route.extend({
-  fastboot: Ember.inject.service(),
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
+export default Route.extend({
+  fastboot: service(),
 
   beforeModel() {
-    let isFastBoot = this.get('fastboot.isFastBoot');
+    let isFastBoot = this.fastboot.isFastBoot;
 
     if (!isFastBoot) {
       return;
     }
 
-    let reqHeaders = this.get('fastboot.request.headers');
-    let authHeaders = reqHeaders.get('Authorization');
+    let reqHeaders = this.fastboot.request.headers;
+    let authHeaders = reqHeaders.Authorization;
 
     if (authHeaders === null) {
       this.set('fastboot.response.statusCode', 401);
@@ -467,13 +501,16 @@ In the example below, we find and store our data in a `shoeboxStore` object, whe
 When the same code is then executed by the client browser, we retrieve the items from the `shoeboxStore` rather than redoing the find (and triggering a network request).
 
 ```javascript
-export default Ember.Route.extend({
-  fastboot: Ember.inject.service(),
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
+export default Route.extend({
+  fastboot: service(),
 
   model(params) {
-    let shoebox = this.get('fastboot.shoebox');
+    let shoebox = fastboot.shoebox;
     let shoeboxStore = shoebox.retrieve('my-store');
-    let isFastBoot = this.get('fastboot.isFastBoot');
+    let isFastBoot = fastboot.isFastBoot;
 
     if (isFastBoot) {
       return this.store.findRecord('post', params.post_id).then(post => {
@@ -515,7 +552,7 @@ The `fetch()` method returns a promise and is very similar to jQuery's `getJSON(
 For example, here's an Ember route that uses `fetch()` to access the GitHub JSON API and use it as the route's model:
 
 ```javascript
-import Route from 'ember-route';
+import Route from '@ember/routing/route';
 import fetch from 'ember-fetch/ajax';
 
 export default Route.extend({
@@ -542,9 +579,12 @@ This addon allows you to specify the page title by adding a `title` property to 
 
 ```javascript
 // routes/post.js
-export default Ember.Route.extend({
-  titleToken: function(model) {
-    return model.get('name');
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+
+export default Route.extend({
+  titleToken(model) {
+    return model.name;
   }
 });
 ```
@@ -576,16 +616,17 @@ This creates a `<meta>` tag whose `property` attribute is `og:title`.
 Now we just need to tell it what the title is, which is typically determined dynamically by the current route's model:
 
 ```javascript
-import Ember from 'ember';
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 
-export default Ember.Route.extend({
+export default Route.extend({
   // This service is the `model` in the head.hbs template,
   // so any properties you set on it are accessible via
   // `model.whatever`.
-  headData: Ember.inject.service(),
+  headData: service(),
 
   afterModel(model) {
-    let title = model.get('title') || "Untitled";
+    let title = model.title || "Untitled";
     this.set('headData.title', title);
   }
 });
@@ -682,19 +723,20 @@ Here's what the `Route` for that page might look like:
 
 ```javascript
 // app/routes/article.js
-import Route from 'ember-route';
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 
 export default Route.extend({
-  fastboot: Ember.service.inject(),
-  weather: Ember.service.inject(),
+  fastboot: service(),
+  weather: service(),
 
   model({ article_id }) {
     return this.store.find('article', article_id);
   },
 
   afterModel() {
-    if (this.get('fastboot.isFastBoot')) {
-      return this.get('weather').fetch();
+    if (this.fastboot.isFastBoot) {
+      return this.weather.fetch();
     }
   }
 });
