@@ -1,0 +1,39 @@
+{
+  "addons": [
+    "loaderio"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://codon-buildpacks.s3.amazonaws.com/buildpacks/heroku/emberjs.tgz"
+    }
+  ],
+  "env": {
+    "ACME_KEY_1": {
+      "required": true
+    },
+    "ACME_KEY_2": {
+      "required": true
+    },
+    "ACME_TOKEN_1": {
+      "required": true
+    },
+    "ACME_TOKEN_2": {
+      "required": true
+    },
+    "LOADERIO_API_KEY": {
+      "required": true
+    },
+    "WORKER_COUNT": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "fastboot-website",
+  "scripts": {
+  },
+  "stack": "cedar-14"
+}
