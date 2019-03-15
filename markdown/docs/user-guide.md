@@ -789,9 +789,25 @@ Pull requests for adding or improving logging facilities are very welcome.
 
 ### Using Node Inspector with Developer Tools
 
-You can get a debugging environment similar to the Chrome developer tools running with a FastBoot app, although it's not (yet) as easy as in the browser.
+#### Node 7.x and above
 
-First, install the Node Inspector:
+You can get a debugging environment similar to the Chrome developer tools running with a FastBoot app.
+
+```sh
+ember build && node --inspect-brk ./node_modules/.bin/ember serve
+```
+
+This does a full rebuild and then starts the FastBoot server in debug mode. Note that the `--inspect-brk` flag will cause your app to start paused to give you a chance to open the debugger.
+
+There are [multiple options](https://nodejs.org/en/docs/guides/debugging-getting-started/#inspector-clients) for connecting to the debug server.
+If you're using Chrome then you can visit `chrome://inspect`:
+
+![Screenshot of accessing the Node debugger client in Chrome devtools](/images/node-debugger-chrome.png).
+
+Click **inspect**, and once it loads, click the "Resume script execution" button (it has a ▶︎ icon) to let FastBoot continue loading.
+
+#### Node 6.x
+If you're running on Node 6.x you'll need to install the Node Inspector:
 
 ```sh
 npm install node-inspector -g
@@ -805,27 +821,14 @@ It waits to fetch the source code for a given file until it's actually needed.
 node-inspector --no-preload
 ```
 
-Once the debug server is running, you'll want to start up the FastBoot server with Node in debug mode.
-One thing about debug mode: it makes everything much slower.
-Since the `ember serve` command does a full build when launched, this becomes agonizingly slow in debug mode.
-
-### Speeding up Server-side Debugging
-
-Avoid the slowness by manually running the build in normal mode, then run FastBoot in debug mode without doing a build:
+Next, perform an initial build then fire up the FastBoot server in debug mode:
 
 ```sh
 ember build && node --debug-brk ./node_modules/.bin/ember serve
 ```
 
-This does a full rebuild and then starts the FastBoot server in debug mode.
-
-Note that the `--debug-brk` flag will cause your app to start paused to give you a chance to open the debugger.
-
-Once you see the output `debugger listening on port 5858`, visit <http://127.0.0.1:8080/debug?port=5858> in your browser.
-Once it loads, click the "Resume script execution" button (it has a ▶︎ icon) to let FastBoot continue loading.
-
-Assuming your app loads without an exception, after a few seconds you will see a message that FastBoot is listening on port 3000\.
-Once you see that, you can open a connection.
+Assuming your app loads without an exception, after a few seconds you will see a message that FastBoot is listening on port 3000.
+Once you see that, you can open a connection with [a debugger client](https://nodejs.org/en/docs/guides/debugging-getting-started/#inspector-clients).
 Any exceptions should be logged in the console, and you can use the tools you'd expect such as `console.log`, `debugger` statements, etc.
 
 ## Architecture
