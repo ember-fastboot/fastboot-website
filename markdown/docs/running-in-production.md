@@ -31,7 +31,7 @@ At its core, FastBoot App Server brings together a handful of common middlewares
 
 ## FastBoot middleware
 
-If you're looking for more control over your production application server we recommend composing the [FastBoot Express Middleware](https://github.com/ember-fastboot/fastboot-express-middleware) with an existing express server.
+If you're looking for more control over your production server we recommend composing the [FastBoot Express Middleware](https://github.com/ember-fastboot/fastboot-express-middleware) with an existing express server.
 
 The middleware lets you respond to HTTP requests with output from your FastBoot application.
 
