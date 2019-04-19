@@ -1,8 +1,10 @@
-import { moduleFor, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
-moduleFor('route:application', 'Unit | Route | application', {
-});
+module('Unit | Route | application', function(hooks) {
+  setupTest(hooks);
 
-test('it exists', function(assert) {
-  assert.ok(true);
+  test('it exists', function(assert) {
+    assert.ok(true);
+  });
 });
