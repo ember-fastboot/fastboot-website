@@ -7,8 +7,8 @@ const fastbootMiddleware = require('fastboot-express-middleware');
 const staticGzip = require('express-serve-static-gzip');
 const sabayon = require('express-sabayon');
 
-var assetPath = 'tmp/deploy-dist'
-var port = process.env.PORT || 3000;
+const assetPath = 'tmp/deploy-dist'
+const port = process.env.PORT || 3000;
 
 // eslint-disable-next-line no-console
 console.log('Booting Ember app...');
@@ -31,9 +31,9 @@ try {
 // eslint-disable-next-line no-console
 console.log('Ember app booted successfully.');
 cluster(function() {
-  var app = express();
+  let app = express();
 
-  var fastboot = fastbootMiddleware(assetPath);
+  let fastboot = fastbootMiddleware(assetPath);
 
   if (assetPath) {
     app.get('/', fastboot);
@@ -44,10 +44,10 @@ cluster(function() {
   app.get(sabayon.path, sabayon.middleware());
   app.get('/*', fastboot);
 
-  var listener = app.listen(port, function() {
-    var host = listener.address().address;
-    var port = listener.address().port;
-    var family = listener.address().family;
+  let listener = app.listen(port, function() {
+    let host = listener.address().address;
+    let port = listener.address().port;
+    let family = listener.address().family;
 
     if (family === 'IPv6') { host = '[' + host + ']'; }
 
