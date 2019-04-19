@@ -19,11 +19,11 @@ env:
 
 
 install:
-  - yarn
+  - npm install
 
 script:
-  - yarn run lint:js
-  - yarn test
+  - npm run lint:js
+  - npm test
 
 deploy:
   provider: heroku
