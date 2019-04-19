@@ -20,11 +20,14 @@ module.exports = {
     // node files
     {
       files: [
-        'fastboot-server.js',
-        'testem.js',
+        '.eslintrc.js',
+        '.template-lintrc.js',
         'ember-cli-build.js',
+        'testem.js',
+        'blueprints/*/index.js',
         'config/**/*.js',
-        'lib/*/index.js'
+        'lib/*/index.js',
+        'server/**/*.js'
       ],
       parserOptions: {
         sourceType: 'script',
@@ -33,15 +36,6 @@ module.exports = {
       env: {
         browser: false,
         node: true
-      }
-    },
-
-    // test files
-    {
-      files: ['tests/**/*.js'],
-      excludedFiles: ['tests/dummy/**/*.js'],
-      env: {
-        embertest: true
       }
     }
   ]
