@@ -25,6 +25,9 @@
     },
     "WORKER_COUNT": {
       "required": true
+    },
+    "EXPERIMENTAL_RENDER_MODE_SERIALIZE": {
+      "required": true
     }
   },
   "formation": {
