@@ -20,7 +20,13 @@ To run the website locally:
 
 ### Running Tests
 
-- `ember test`
+* `ember test`
+* `ember test --server`
+
+### Building
+
+* `ember build` (development)
+* `ember build --environment production` (production)
 
 ### Deploying
 

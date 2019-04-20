@@ -6,6 +6,8 @@ export default Component.extend({
   classNameBindings: 'isOffTop',
 
   didInsertElement() {
+    this._super(...arguments);
+    
     let $window = $(window);
 
     $window.on('scroll', () => {
