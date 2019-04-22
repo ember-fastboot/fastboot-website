@@ -15,7 +15,8 @@
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "ember serve",
-    "test": "ember test"
+    "test": "ember test",
+    "server:node": "ember build --prod --output-path='tmp/deploy-dist' && EXPERIMENTAL_RENDER_MODE_SERIALIZE=true node fastboot-server.js"
   },
   "devDependencies": {
     "@ember/jquery": "^0.6.0",
