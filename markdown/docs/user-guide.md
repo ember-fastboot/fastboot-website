@@ -928,10 +928,10 @@ If you discover a security vulnerability in FastBoot, we ask that you follow Emb
 
 ## Useful Links
 
-[ember-cli-deploy]: http://ember-cli-deploy.github.io/ember-cli-deploy/
-[ember-cli-document-title]: https://github.com/kimroen/ember-cli-document-title
-[ember-cli-head]: https://github.com/ronco/ember-cli-head
-[ember-network]: https://github.com/tomdale/ember-network
-[express]: http://expressjs.com
-[fastboot-server]: https://github.com/ember-fastboot/ember-fastboot-server
-[fetch-api]: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+* [ember-cli-deploy](http://ember-cli-deploy.github.io/ember-cli-deploy/)
+* [ember-cli-document-title](https://github.com/kimroen/ember-cli-document-title)
+* [ember-cli-head](https://github.com/ronco/ember-cli-head)
+* [ember-fetch](https://github.com/ember-cli/ember-fetch)
+* [express](http://expressjs.com)
+* [fastboot-server](https://github.com/ember-fastboot/ember-fastboot-server)
+* [fetch-api](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
