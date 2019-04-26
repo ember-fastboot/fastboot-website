@@ -468,6 +468,6 @@ issues:
 ## Getting Help
 
 If you're still having trouble figuring out how to make your addon
-FastBoot compatible, feel free to join the `#-fastboot` channel on the
-[Ember Community Slack](https://ember-community-slackin.herokuapp.com/)
+FastBoot compatible, feel free to join the `#fastboot` channel on the
+[Ember Community Discord](https://discordapp.com/invite/zT3asNS)
 to get help.
