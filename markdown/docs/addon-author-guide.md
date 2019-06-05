@@ -96,7 +96,7 @@ our component file that's shared across all instances of the component:
 ```js
 // addon/components/resizable-component.js
 import Component from '@ember/component';
-import $ from "jquery";
+import $ from 'jquery';
 
 let componentsToNotify = [];
 $(window).on('resize', () => {
@@ -136,7 +136,7 @@ and never in Node).
 ```js
 // addon/components/resizable-component.js
 import Component from '@ember/component';
-import $ from "jquery";
+import $ from 'jquery';
 
 let componentsToNotify = [];
 let didSetupListener = false;
