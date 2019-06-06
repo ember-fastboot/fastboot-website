@@ -95,15 +95,15 @@ our component file that's shared across all instances of the component:
 
 ```js
 // addon/components/resizable-component.js
-import Ember from "ember";
-import $ from "jquery";
+import Component from '@ember/component';
+import $ from 'jquery';
 
 let componentsToNotify = [];
 $(window).on('resize', () => {
   componentsToNotify.forEach(c => c.windowDidResize());
 });
 
-export default Ember.Component.extend({
+export default Component.extend({
   init() {
     componentsToNotify.push(this);
   },
@@ -135,8 +135,8 @@ and never in Node).
 
 ```js
 // addon/components/resizable-component.js
-import Ember from "ember";
-import $ from "jquery";
+import Component from '@ember/component';
+import $ from 'jquery';
 
 let componentsToNotify = [];
 let didSetupListener = false;
@@ -148,7 +148,7 @@ function setupListener() {
   });
 }
 
-export default Ember.Component.extend({
+export default Component.extend({
   didInsertElement() {
     if (!didSetupListener) { setupListener(); }
     componentsToNotify.push(this);
@@ -429,17 +429,19 @@ Instead, you can write a computed property that uses the low-level
 `getOwner` functionality to lookup the `fastboot` service directly:
 
 ```js
-import Ember from "ember";
+import Service from '@ember/service';
+import { computed }  from '@ember/object';
+import { getOwner }  from '@ember/application';
 
-export default Ember.Service.extend({
+export default Service.extend({
   doSomething() {
     let fastboot = this.get('fastboot');
     if (!fastboot) { return; }
     // do something that requires FastBoot
   },
 
-  fastboot: Ember.computed(function() {
-    let owner = Ember.getOwner(this);
+  fastboot: computed(function() {
+    let owner = getOwner(this);
 
     return owner.lookup('service:fastboot');
   })

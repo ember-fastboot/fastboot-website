@@ -16,7 +16,7 @@ To run the website locally:
 - `cd fastboot-website`
 - `npm install`
 - `ember serve`
-- Visit the app at <http://localhost:3000>.
+- Visit the app at <http://localhost:4200>.
 
 ### Running Tests
 
