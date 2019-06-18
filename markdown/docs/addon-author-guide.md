@@ -208,7 +208,7 @@ treeForVendor(defaultTree) {
   return new mergeTrees([defaultTree, browserVendorLib]);
 }
 
-included() {
+included(app) {
   // this file will be loaded in FastBoot but will not be eval'd
   app.import('vendor/<third party lib file name>.js');
 }
