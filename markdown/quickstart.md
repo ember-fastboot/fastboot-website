@@ -60,7 +60,7 @@ export default Route.extend({
       .then(function(response) {
         return response.json();
       })
-      .then(function(data){
+      .then(function(data) {
         return data;
       });
   }
