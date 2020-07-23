@@ -14,10 +14,6 @@ Most Ember applications should work out of the box.
 However, there are some patterns that you should be sure to follow to guarantee that your application is fully FastBoot compatible.
 See [Tips and Tricks](#tips-and-tricks) below for a full list.
 
-## Introduction Video
-
-[![Introduction to Ember FastBoot](https://i.vimeocdn.com/video/559399270_640x360.jpg)](https://vimeo.com/157688134)
-
 ## Installation
 
 FastBoot is an addon you can add to existing Ember CLI apps.
