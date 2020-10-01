@@ -41,3 +41,6 @@ npm run server:node
 ### Deploying
 
 Pull requests merged into master are automatically deployed to Heroku.
+
+THANK YOU!
+Keep Learning Keep Supporting!
