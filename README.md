@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/ember-fastboot/fastboot-website.svg?branch=master)](https://travis-ci.org/ember-fastboot/fastboot-website)
 
-# FastBoot Website
+# FastBoot Website-Nice work
 
 This is the Ember.js app that powers the FastBoot website, <https://ember-fastboot.com>.
 
