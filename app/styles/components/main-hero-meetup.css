@@ -9,7 +9,7 @@
   display: grid;
   grid-gap: 2rem;
   margin: 1rem 0 2rem;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   cursor: pointer;
   text-decoration: none;
   border: none;
@@ -17,6 +17,10 @@
 
 .main-hero-meetup:hover, .main-hero-meetup:focus {
   color: var(--white);
+}
+
+.main-hero-meetup .content {
+  grid-column: 1 / span 2;
 }
 
 .main-hero-meetup .invite {
