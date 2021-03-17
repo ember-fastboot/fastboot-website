@@ -1,0 +1,41 @@
+.main-hero-meetup {
+  background: rgba(0, 0, 0, 0.33);
+  border-radius: 0.25em;
+  color: var(--white);
+  display: flex;
+  font-size: 1.125rem;
+  align-items: center;
+  padding: 1rem;
+  display: grid;
+  grid-gap: 2rem;
+  margin: 1rem 0 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+}
+
+.main-hero-meetup:hover, .main-hero-meetup:focus {
+  color: var(--white);
+}
+
+.main-hero-meetup .invite {
+  margin: 0;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.main-hero-meetup .button {
+  align-items: center;
+  text-align: center;
+  border-radius: 0.25rem;
+  border: 2px solid var(--white);
+  min-width: 10em;
+  padding: 0.55em 2em 0.75em;
+  text-align: center;
+  text-decoration: none;
+}
+
+.orange {
+  color: #FFA91B;
+}
