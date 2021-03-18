@@ -21,6 +21,7 @@
 
 .main-hero-meetup .content {
   grid-column: 1 / span 2;
+  font-size: 110%;
 }
 
 .main-hero-meetup .small {
