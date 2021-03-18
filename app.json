@@ -9,19 +9,19 @@
   ],
   "env": {
     "ACME_KEY_1": {
-      "required": true
+      "required": false
     },
     "ACME_KEY_2": {
-      "required": true
+      "required": false
     },
     "ACME_TOKEN_1": {
-      "required": true
+      "required": false
     },
     "ACME_TOKEN_2": {
-      "required": true
+      "required": false
     },
     "LOADERIO_API_KEY": {
-      "required": true
+      "required": false
     },
     "WORKER_COUNT": {
       "required": true
