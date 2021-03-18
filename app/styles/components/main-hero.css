@@ -29,7 +29,6 @@
   text-transform: lowercase;
 }
 
-
 .main-hero-requirements {
   color: rgba(255, 255, 255, 0.25);
   font-size: var(--h6);
@@ -52,6 +51,11 @@
   text-align: center;
   text-decoration: none;
   margin-bottom: 30px;
+}
+
+.main-hero-button.small {
+  padding: 0.4em 1.3em 0.6em;
+  font-size: 90%;
 }
 
 .main-hero-terminal pre,

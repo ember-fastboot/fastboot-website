@@ -6,6 +6,7 @@
 @import "components/command-prompt";
 @import "components/fastboot-logo";
 @import "components/main-hero";
+@import "components/main-hero-meetup";
 @import "components/main-hero-terminal";
 @import "components/main-nav";
 @import "components/syntax";
