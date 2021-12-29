@@ -115,6 +115,10 @@ README](https://github.com/ember-fastboot/ember-fastboot-server).
 
 ## Layer0
 
-[Layer0](https://www.layer0.co) is an all-in-one platform to develop, deploy, preview, experiment on, monitor, and run your headless frontend. It is focused on large, dynamic websites and best-in-class performance through EdgeJS (a JavaScript-based Content Delivery Network), predictive prefetching, and performance monitoring. Layer0 offers a free tier. Get started in just a few minutes by following [Layer0's guide to deploying Fastboot](https://docs.layer0.co/guides/ember_fastboot).
+[Layer0](https://www.layer0.co) is an all-in-one platform to develop, deploy, preview, experiment on, monitor, and run your headless frontend, focused on EdgeJS, predictive prefetching, and performance monitoring.
 
+Get started in just a few minutes by following [Layer0's guide to deploying Fastboot](https://docs.layer0.co/guides/ember_fastboot).
 
+Alternatively, you can click the deploy button below to create a new project:
+
+[![Deploy Layer0](https://docs.layer0.co/button.svg)](https://app.layer0.co/deploy?repo=https%3A%2F%2Fgithub.com%2Flayer0-docs%2Flayer0-ember-fastboot-example&sgId=43cb890e-c460-4450-ae4a-99c440bff375)
