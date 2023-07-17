@@ -1,8 +1,8 @@
 {{main-hero}}
 
 <div class="p1">
-  {{main-nav}}
+  {{main-nav path=model.path}}
   <section class="max-width-3 mx-auto">
-    {{md-text text=model html=true typographer=true linkify=true}}
+    {{md-text text=model.markdown html=true typographer=true linkify=true}}
   </section>
 </div>
