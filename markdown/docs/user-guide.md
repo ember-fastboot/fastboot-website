@@ -83,15 +83,17 @@ FastBoot registers the `fastboot` [service](https://guides.emberjs.com/v2.7.0/ap
 
 ```javascript
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
-import { reads } from '@ember/object/computed';
+import { service } from '@ember/service';
 
-export default Route.extend({
-  fastboot: service(),
-  isFastBoot: reads('fastboot.isFastBoot'),
+export default class Application extends Route {
+  @service fastboot;
+
+  get isFastBoot() {
+    return this.fastboot.isFastBoot;
+  }
 
   // ... Application code
-});
+}
 ```
 
 This service contains several useful objects and methods you can use to manage an application's state when it is being FastBooted.
@@ -128,17 +130,17 @@ For more information about HTTP headers see [here](https://developer.mozilla.org
 
 ```javascript
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
-export default Route.extend({
-  fastboot: service(),
+export default class Application extends Route {
+  @service fastboot;
 
   model() {
-    let headers = this.get('fastboot.request.headers');
-    let xRequestHeader = headers.get('X-Request');
+    let headers = this.fastboot.request.headers;
+    let xRequestHeader = headers.['X-Request'];
     // ...
   }
-});
+}
 ```
 
 #### Request Cookies
@@ -147,16 +149,16 @@ You can access cookies for the current request via `fastboot.request` in the `fa
 
 ```javascript
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
-export default Route.extend({
-  fastboot: service(),
+export default class Application extends Route {
+  @service fastboot;
 
   model() {
-    let authToken = this.get('fastboot.request.cookies.auth');
+    let authToken = this.fastboot.request.cookies.auth;
     // ...
   }
-});
+}
 ```
 
 The FastBoot service's `cookies` property is an object containing the request's cookies as key/value pairs.
@@ -169,16 +171,16 @@ For example, when requesting `http://myapp.example.com/photos` from your browser
 
 ```javascript
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
-export default Route.extend({
-  fastboot: service(),
+export default class Application extends Route {
+  @service fastboot;
 
   model() {
     let host = this.fastboot.request.host;
     // ...
   }
-});
+}
 ```
 
 Retrieving `host` will error on 2 conditions:
@@ -225,16 +227,16 @@ You can access query parameters for the current request via `fastboot.request` i
 
 ```javascript
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
-export default Route.extend({
-  fastboot: service(),
+export default class Application extends Route {
+  @service fastboot;
 
   model() {
     let authToken = this.fastboot.request.queryParams.auth;
     // ...
   }
-});
+}
 ```
 
 The service's `queryParams` property is an object containing the request's query parameters as key/value pairs.
@@ -245,16 +247,16 @@ You can access the path (`/` or `/some-path`) of the request that the current Fa
 
 ```javascript
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
-export default Route.extend({
-  fastboot: service(),
+export default class Application extends Route {
+  @service fastboot;
 
   model() {
     let path = this.fastboot.request.path;
     // ...
   }
-});
+}
 ```
 
 #### Protocol
@@ -263,16 +265,16 @@ You can access the protocol (`http:` or `https:`) of the request that the curren
 
 ```javascript
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
-export default Route.extend({
-  fastboot: service(),
+export default class Application extends Route {
+  @service fastboot;
 
   model() {
     let protocol = this.fastboot.request.protocol;
     // ...
   }
-});
+}
 ```
 
 #### Request Method
@@ -282,16 +284,16 @@ The `method` property will return the method name (`GET`, `POST`, `PATCH`...) of
 
 ```javascript
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
-export default Route.extend({
-  fastboot: service(),
+export default class Application extends Route {
+  @service fastboot;
 
   model() {
     let method = this.fastboot.request.method;
     // ...
   }
-});
+}
 ```
 
 #### Request Body
@@ -363,16 +365,16 @@ or even a raw Buffer.
 
 ```javascript
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
-export default Route.extend({
-  fastboot: service(),
+export default class Application extends Route {
+  @service fastboot;
 
   model() {
     let method = this.fastboot.request.body;
     // ...
   }
-});
+}
 ```
 
 ### FastBoot Response
@@ -386,10 +388,10 @@ The `headers` object implements part of the [Fetch API's Headers class](https://
 
 ```javascript
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
-export default Route.extend({
-  fastboot: service(),
+export default class Application extends Route {
+  @service fastboot;
 
   model() {
     let isFastBoot = this.fastboot.isFastBoot;
@@ -400,7 +402,7 @@ export default Route.extend({
     }
     // ...
   }
-});
+}
 ```
 
 #### Status Code
@@ -411,10 +413,10 @@ For example if you want a route of your application to be `401 - Unauthorized` i
 
 ```javascript
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
-export default Route.extend({
-  fastboot: service(),
+export default class Application extends Route {
+  @service fastboot;
 
   beforeModel() {
     let isFastBoot = this.fastboot.isFastBoot;
@@ -431,7 +433,7 @@ export default Route.extend({
     }
     // ...
   }
-});
+}
 ```
 
 FastBoot handles `200`, [`204` and `3xx`](https://github.com/ember-fastboot/fastboot/blob/b62e795c8c21c4a5dca09f2cf20e4367c843fc7b/src/result.js#L27-L43) by default.
@@ -498,10 +500,11 @@ When the same code is then executed by the client browser, we retrieve the items
 
 ```javascript
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
-export default Route.extend({
-  fastboot: service(),
+export default class Application extends Route {
+  @service fastboot;
+  @service store;
 
   model(params) {
     let shoebox = fastboot.shoebox;
@@ -520,7 +523,7 @@ export default Route.extend({
 
     return shoeboxStore && shoeboxStore[params.post_id];
   }
-});
+}
 ```
 
 ## Useful Ember Addons for FastBoot
@@ -551,14 +554,14 @@ For example, here's an Ember route that uses `fetch()` to access the GitHub JSON
 import Route from '@ember/routing/route';
 import fetch from 'ember-fetch/ajax';
 
-export default Route.extend({
+export default class Application extends Route {
   model() {
     return fetch('https://api.github.com/users/tomdale/events')
       .then(function(response) {
         return response;
       });
   }
-});
+}
 ```
 
 For more information, see [ember-fetch](https://github.com/stefanpenner/ember-fetch) and the [Fetch documentation on MDN][fetch-api].
@@ -576,13 +579,13 @@ This addon allows you to specify the page title by adding a `title` property to 
 ```javascript
 // routes/post.js
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
-export default Route.extend({
+export default class Application extends Route {
   titleToken(model) {
     return model.name;
   }
-});
+}
 ```
 
 See [ember-cli-document-title](https://github.com/kimroen/ember-cli-document-title) for more information.
@@ -613,9 +616,9 @@ Now we just need to tell it what the title is, which is typically determined dyn
 
 ```javascript
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
-export default Route.extend({
+export default class Application extends Route {
   // This service is the `model` in the head.hbs template,
   // so any properties you set on it are accessible via
   // `model.whatever`.
@@ -625,7 +628,7 @@ export default Route.extend({
     let title = model.title || "Untitled";
     this.set('headData.title', title);
   }
-});
+}
 ```
 
 For more information, see [ember-cli-head](https://github.com/ronco/ember-cli-head).
@@ -720,11 +723,12 @@ Here's what the `Route` for that page might look like:
 ```javascript
 // app/routes/article.js
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
-export default Route.extend({
-  fastboot: service(),
-  weather: service(),
+export default class Application extends Route {
+  @service fastboot;
+  @service store;
+  @service weather;
 
   model({ article_id }) {
     return this.store.find('article', article_id);
@@ -735,7 +739,7 @@ export default Route.extend({
       return this.weather.fetch();
     }
   }
-});
+}
 ```
 
 In this example, the `Route` always returns the article model from the model hook.
