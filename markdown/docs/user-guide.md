@@ -137,7 +137,7 @@ export default class Application extends Route {
 
   model() {
     let headers = this.fastboot.request.headers;
-    let xRequestHeader = headers.['X-Request'];
+    let xRequestHeader = headers.get('X-Request');
     // ...
   }
 }
