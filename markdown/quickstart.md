@@ -54,14 +54,14 @@ Implement the model hook like I did below. You might want to change the username
 import Route from '@ember/routing/route';
 import fetch from 'ember-fetch/ajax';
 
-export default Route.extend({
+export default class Application extends Route {
   model() {
     return fetch('https://api.github.com/users/tomdale')
       .then(function(response) {
         return response;
       });
   }
-});
+}
 ```
 
 Next, let's render that model in the `index` template. Open `app/templates/index.hbs` and type the following Handlebars template:

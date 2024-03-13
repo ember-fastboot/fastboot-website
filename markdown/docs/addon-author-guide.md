@@ -103,7 +103,7 @@ $(window).on('resize', () => {
   componentsToNotify.forEach(c => c.windowDidResize());
 });
 
-export default Component.extend({
+export default class ResizableComponent extends Component {
   init() {
     componentsToNotify.push(this);
   },
@@ -120,7 +120,7 @@ export default Component.extend({
       }
     }
   }
-});
+}
 ```
 
 In this approach, we set up an event listener on the window even if the
@@ -148,7 +148,7 @@ function setupListener() {
   });
 }
 
-export default Component.extend({
+export default class ResizableComponent extends Component {
   didInsertElement() {
     if (!didSetupListener) { setupListener(); }
     componentsToNotify.push(this);
@@ -166,7 +166,7 @@ export default Component.extend({
       }
     }
   }
-});
+}
 ```
 
 This lazy approach moves setup to the first time the component is used,
@@ -425,27 +425,26 @@ doesn't have FastBoot installed. In that case, if your addon tries to
 inject the `fastboot` service, they'll get an exception saying the
 `fastboot` service cannot be found.
 
-Instead, you can write a computed property that uses the low-level
+Instead, you can write a getter that uses the low-level
 `getOwner` functionality to lookup the `fastboot` service directly:
 
 ```js
 import Service from '@ember/service';
-import { computed }  from '@ember/object';
 import { getOwner }  from '@ember/application';
 
-export default Service.extend({
+export default class SomeService extends Service {
   doSomething() {
-    let fastboot = this.get('fastboot');
+    let fastboot = this.fastboot;
     if (!fastboot) { return; }
     // do something that requires FastBoot
   },
 
-  fastboot: computed(function() {
+  get fastboot() {
     let owner = getOwner(this);
 
     return owner.lookup('service:fastboot');
-  })
-});
+  }
+}
 ```
 
 ## Examples
