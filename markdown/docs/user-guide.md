@@ -136,7 +136,7 @@ export default class Application extends Route {
   @service fastboot;
 
   model() {
-    let headers = this.fastboot.request.headers;
+    let headers = this.fastboot.request?.headers;
     let xRequestHeader = headers.get('X-Request');
     // ...
   }
@@ -155,7 +155,7 @@ export default class Application extends Route {
   @service fastboot;
 
   model() {
-    let authToken = this.fastboot.request.cookies.auth;
+    let authToken = this.fastboot.request?.cookies.auth;
     // ...
   }
 }
@@ -177,7 +177,7 @@ export default class Application extends Route {
   @service fastboot;
 
   model() {
-    let host = this.fastboot.request.host;
+    let host = this.fastboot.request?.host;
     // ...
   }
 }
@@ -233,7 +233,7 @@ export default class Application extends Route {
   @service fastboot;
 
   model() {
-    let authToken = this.fastboot.request.queryParams.auth;
+    let authToken = this.fastboot.request?.queryParams.auth;
     // ...
   }
 }
