@@ -425,7 +425,7 @@ doesn't have FastBoot installed. In that case, if your addon tries to
 inject the `fastboot` service, they'll get an exception saying the
 `fastboot` service cannot be found.
 
-Instead, you can write a computed property that uses the low-level
+Instead, you can write a getter that uses the low-level
 `getOwner` functionality to lookup the `fastboot` service directly:
 
 ```js
