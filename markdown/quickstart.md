@@ -58,7 +58,10 @@ export default class Application extends Route {
   model() {
     return fetch('https://api.github.com/users/tomdale')
       .then(function(response) {
-        return response;
+        return response.json();
+      })
+      .then(function(data) {
+        return data;
       });
   }
 }
