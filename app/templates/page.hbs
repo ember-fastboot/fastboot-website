@@ -1,6 +1,6 @@
 <div class="p1">
-  {{main-nav}}
-  {{#liquid-bind model as |currentModel|}}
+  {{main-nav path=model.path}}
+  {{#liquid-bind model.markdown as |currentModel|}}
     <section class="max-width-3 mx-auto">
       {{#if currentModel}}
         {{md-text text=currentModel html=true typographer=true linkify=true}}
