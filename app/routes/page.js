@@ -4,6 +4,6 @@ import markdownFiles from 'ember-fr-markdown-file/markdownFiles';
 
 export default Route.extend({
   model(params) {
-    return get(markdownFiles, params.path.replace(/\//g, '.')) || null;
+    return get(markdownFiles, params.path.replace(/\/$/, '').replace(/\//g, '.')) || null;
   }
 });
