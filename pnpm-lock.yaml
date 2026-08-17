@@ -138,6 +138,9 @@ importers:
       highlight.js:
         specifier: ^9.15.6
         version: 9.15.6
+      highlightjs:
+        specifier: ^9.16.2
+        version: 9.16.2
       liquid-fire:
         specifier: ^0.29.5
         version: 0.29.5(@babel/core@7.4.3)
@@ -2921,8 +2924,8 @@ packages:
     resolution: {integrity: sha512-zozTAWM1D6sozHo8kqhfYgsac+B+q0PmsjXeyDrYIHHcBN0zTVT66+s2GW1GZv7DbyaROdLXKdabwS/WqPyIdQ==}
     deprecated: Version no longer supported. Upgrade to @latest
 
-  highlightjs@9.12.0:
-    resolution: {integrity: sha512-eAhWMtDZaOZIQdxIP4UEB1vNp/CVXQPdMSihTSuaExhFIRC0BVpXbtP3mTP1hDoGOyh7nbB3cuC3sOPhG5wGDA==}
+  highlightjs@9.16.2:
+    resolution: {integrity: sha512-FK1vmMj8BbEipEy8DLIvp71t5UsC7n2D6En/UfM/91PCwmOpj6f2iu0Y0coRC62KSRHHC+dquM2xMULV/X7NFg==}
     deprecated: Use the 'highlight.js' package instead https://npm.im/highlight.js
 
   hmac-drbg@1.0.1:
@@ -9391,7 +9394,7 @@ snapshots:
 
   highlight.js@9.15.6: {}
 
-  highlightjs@9.12.0: {}
+  highlightjs@9.16.2: {}
 
   hmac-drbg@1.0.1:
     dependencies:
@@ -10102,7 +10105,7 @@ snapshots:
   markdown-code-highlighting@0.2.1(@babel/core@7.4.3):
     dependencies:
       ember-cli-babel: 6.18.0(@babel/core@7.4.3)
-      highlightjs: 9.12.0
+      highlightjs: 9.16.2
       marked: 0.3.19
     transitivePeerDependencies:
       - '@babel/core'

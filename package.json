@@ -57,6 +57,7 @@
     "ember-source": "~3.9.0",
     "eslint-plugin-ember": "^6.3.0",
     "highlight.js": "^9.15.6",
+    "highlightjs": "^9.16.2",
     "liquid-fire": "^0.29.5",
     "loader.js": "^4.7.0",
     "markdown-code-highlighting": "^0.2.1",
