@@ -11,7 +11,7 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "ember build",
+    "build": "ember build --environment=production",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "ember serve",
@@ -57,6 +57,7 @@
     "ember-source": "~3.9.0",
     "eslint-plugin-ember": "^6.3.0",
     "highlight.js": "^9.15.6",
+    "highlightjs": "^9.16.2",
     "liquid-fire": "^0.29.5",
     "loader.js": "^4.7.0",
     "markdown-code-highlighting": "^0.2.1",
@@ -65,6 +66,7 @@
     "postcss-custom-media": "^7.0.8",
     "postcss-custom-properties": "^8.0.10",
     "postcss-import": "^12.0.1",
+    "prember": "^2.1.0",
     "qunit-dom": "^0.8.0"
   },
   "engines": {
@@ -76,5 +78,6 @@
     "express-sabayon": "hone/express-sabayon",
     "express-serve-static-gzip": "hone/express-serve-static-gzip",
     "fastboot-express-middleware": "^1.2.0"
-  }
+  },
+  "packageManager": "pnpm@10.34.4+sha512.8768be55200ae3f2226b6527fcca2687e14bc4e5f12d7721a0f25da3df47915177058648db4177baf348120fa0ba2752d8d8d93f6beaf1fe64ae18da8de961af"
 }

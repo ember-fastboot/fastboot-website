@@ -10,6 +10,15 @@ module.exports = function(defaults) {
   }
 
   const app = new EmberApp(defaults, {
+    prember: {
+      urls: [
+        '/',
+        '/quickstart',
+        '/docs/user-guide',
+        '/docs/deploying',
+        '/docs/addon-author-guide'
+      ]
+    },
     postcssOptions: {
       compile: {
         enabled: true,
