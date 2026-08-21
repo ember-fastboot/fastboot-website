@@ -197,6 +197,8 @@ Node compatible, you can wrap it with a check as below in an addon:
 
 ```js
 var map = require('broccoli-stew').map;
+var Funnel = require('broccoli-funnel');
+var mergeTrees = require('broccoli-merge-trees');
 
 treeForVendor(defaultTree) {
   var browserVendorLib = new Funnel(<path to your third party lib>);
@@ -206,7 +208,7 @@ treeForVendor(defaultTree) {
   return new mergeTrees([defaultTree, browserVendorLib]);
 }
 
-included() {
+included(app) {
   // this file will be loaded in FastBoot but will not be eval'd
   app.import('vendor/<third party lib file name>.js');
 }
