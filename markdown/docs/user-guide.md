@@ -814,12 +814,12 @@ Since the `ember serve` command does a full build when launched, this becomes ag
 Avoid the slowness by manually running the build in normal mode, then run FastBoot in debug mode without doing a build:
 
 ```sh
-ember build && node --debug-brk ./node_modules/.bin/ember serve
+ember build && node --inspect-brk ./node_modules/.bin/ember serve
 ```
 
 This does a full rebuild and then starts the FastBoot server in debug mode.
 
-Note that the `--debug-brk` flag will cause your app to start paused to give you a chance to open the debugger.
+Note that the `--inspect-brk` flag will cause your app to start paused to give you a chance to open the debugger.
 
 Once you see the output `debugger listening on port 5858`, visit <http://127.0.0.1:8080/debug?port=5858> in your browser.
 Once it loads, click the "Resume script execution" button (it has a ▶︎ icon) to let FastBoot continue loading.
